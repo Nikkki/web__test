@@ -4,6 +4,9 @@ var path = require('path');
 var fs = require('fs');
 var Validator = require('./../public/javascripts/controller/validateForms');
 var SubscriberDB = require('../models/subscriber').Subscriber;
+//var geolocation = require('geolocation');
+var sendmail = require('sendmail')();
+useragent = require('express-useragent');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/COURSES');
@@ -22,51 +25,58 @@ router.post('/subscribe', function(req, res) {
         email: ['isNonEmpty', 'isEmail'],
         phoneNum: ['isNonEmpty','isPhoneUA']
     });
-
     validator.validate(subscriber);
-    console.log(validator.errors);
+
 
     if (validator.errors.length > 0) {
         res.sendStatus(400);
 
     } else {
         res.sendStatus(200);
-        console.log(subscriber.username);
+        //console.log(req.navigator.userAgent);
         var subscriberDB = new SubscriberDB({
             username: subscriber.username,
             phoneNum: subscriber.phoneNum,
-            email: subscriber.email
+            email: subscriber.email,
+            ip: subscriber.ip,
+            city: subscriber.city,
+            country: subscriber.country,
+            update: subscriber.update
         });
+        /*saving in DB*/
         subscriberDB.save(function (err, subscriberDB) {
             if(err) throw err;
         });
+        /*END saving in DB*/
+
+        /*---USer Agent---*/
+        var source = req.headers['user-agent'],
+            userAgent = useragent.parse(source);
+        /*---USER Agent end-----*/
+
+
+        /*----------sending on email -------------*/
+        sendmail({
+            from: subscriber.email,
+            to: 'nikita.nesterchuk@yandex.ru',
+            subject: 'Заявка на PHP/JS обучение с edu.apibest.com',
+            content: 'Здравствуйте,' + '\n'+
+                'поступила заявка на обучение.' + '\n'+'\n'+
+                'Имя = ' +  subscriber.username + '\n'+ge
+                'Телефон = ' + subscriber.phoneNum + '\n'+
+                'Email = ' + subscriber.email + '\n' +
+                'ip = ' + subscriber.ip + '\n' +
+                'city = ' + subscriber.city + '\n' +
+                'country = ' + subscriber.country + '\n' +
+                'userAgent: ' + JSON.stringify(userAgent.source) + '\n'
+        }, function(err, reply) {
+            console.log(err && err.stack);
+            console.dir(reply);
+        });
+        /* -----------END sending on email ---------*/
 
         res.end();
     }
-
-
-
-    //res.sendFile(path.resolve('dist/index.html'));
-    //var username = req.body.username;
-    //var phoneNum = req.body.phoneNum;
-  	//var email = req.body.email;
-    //
-    //var data = function(){
-    //    return 'Имя - ' + username + '\n'
-    //        + 'Номер телефона - ' + phoneNum + '\n'
-    //        + 'Email - ' + email + '\n'
-    //        + '--------------------' + '\n';
-    //}
-    //
-    //JSON.stringify(data());
-    //
-    //fs.appendFile(path.resolve('registration.txt'), data(), function(err) {
-    //    if(err) {
-    //        console.log(err);
-    //    } else {
-    //        console.log("Файл сохранен.");
-    //    }
-    //});
 });
 
 

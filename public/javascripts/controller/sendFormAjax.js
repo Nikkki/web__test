@@ -2,6 +2,7 @@
 var Subscriber = require('./../model/subscriber.js');
 var Validator = require('./validateForms.js');
 var form = document.getElementById('form-reg');
+var modal = require('./../../../dist/js/bootstrap.min');
 
 $('#form-reg').submit(function (e){
     e.preventDefault();
@@ -10,6 +11,10 @@ $('#form-reg').submit(function (e){
     subscriber.username = $('#form-reg [name = username]').val();
     subscriber.phoneNum = $('#form-reg [name = phoneNum]').val();
     subscriber.email = $('#form-reg [name = email]').val();
+    subscriber.ip = geoplugin_request();
+    subscriber.city = geoplugin_city();
+    subscriber.country = geoplugin_countryName();
+    subscriber.update = Date.now();
 
     var validator = new Validator({
         username: ['isNonEmpty', 'isAlpha'],
@@ -48,29 +53,21 @@ $('#form-reg').submit(function (e){
             statusCode: {
 
                 200: function () {
-                    var error200Txt = 'Ваша заявка приянта!';
-                    $('.modal-response-js')
-                        .removeClass('in')
-                        .attr('aria-hidden', 'true')
-                        .css({'display': 'none'});
+                    var error200Txt = 'Спасибо, Ваша заявка принята! Мы с Вами свяжемся в ближайшее время';
+                    $('.modal').modal('show');
                     $('.modal-title').text(error200Txt);
                 },
                 400: function () {
-
+                    var error400Txt = 'Извините, но что-то пошло не так, повторите попытку'
+                    $('.modal').modal('show');
+                    $('.modal-title').text(error400Txt);
                 }
             }
         }).then(function() {
             console.log('уряя');
-            //var error200Txt = 'Ваша заявка приянта! Мы с Вами свяжемся';
-            //$('.modal-response-js')
-            //    .addClass('in')
-            //    .attr('aria-hidden', 'false')
-            //    .css({'display': 'block'});
-            //$('.modal-body').text(error200Txt);
         }, function () {
-            console.log('lbxm');
+            console.log('что-то пошло не так...');
         });
-        return console.log('request sended = ' + subscriber);
     }
 });
 
