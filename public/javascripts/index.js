@@ -1,3 +1,12 @@
-var Subscriber = require('./model/subscriber.js'),
-    validation = require('./controller/validateForms.js'),
-    sendFormAjax = require('./controller/sendFormAjax.js');
+var Router = require('./router/routerTest');
+var router = new Router();
+var BtnTest = require('./view/test/BtnTest');
+var NextText =require('./view/test/NextTest');
+var Views= require('./view/testView.js')(router);
+
+
+
+
+
+
+

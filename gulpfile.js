@@ -31,7 +31,7 @@ gulp.task('connect', function() {
 
 /*html*/
 gulp.task('html', function () {
-  gulp.src('./dist/index.html')
+  gulp.src('./dist/quiz.html')
     .pipe(connect.reload());
 });
 
@@ -46,7 +46,7 @@ gulp.task('browserify', function () {
 
 
 gulp.task('watch', function (){
-	gulp.watch(['./dist/index.html'], ['html']);
+	gulp.watch(['./dist/quiz.html'], ['html']);
   	gulp.watch('./public/javascripts/**/*.js', ['browserify']);
 	gulp.watch(['./public/stylesheets/**/*.scss'], ['css']);
 })

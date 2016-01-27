@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Школа разработки Web-приложений</title>
+
+    <!-- Bootstrap -->
+    <link href="/styles/main.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<section class="container-fluid ">
+    <div class="row block-logo"><img src="/img/logo2.png" alt="Logo" class=" logo img-responsive center-block"></div>
+    <div class="clearfix"></div>
+    <div id="test"></div>
+    <div id="render-test-btn"></div>
+
+
+</section>
+<footer class="container-fluid footer"></footer>
+
+<!--TEMPLATES-->
+    <!--home page-->
+    <script type="text/html" id='form-start-test-js'>
+        <form name="form-test" id="form-test">
+            <div class="row">
+                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-3">
+                    <input type="text" name="username" class="form-control input-text" id="inputName" placeholder="Как Вас зовут?" data-prop="имя">
+                </div>
+                <!--<div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-3">-->
+                <!--<input type="radio" name="test" class="form-control input-text" id="testPHP" data-prop="имя">-->
+                <!--<input type="radio" name="test" class="form-control input-text" id="testJS" data-prop="имя">-->
+                <!--</div>-->
+            </div>
+            <button type="button" id="startTest-js" class=" btn btn-default center-block btn-register" >Начать тест</button>
+        </form>
+    </script>
+<!--END home page-->
+
+<!-- for question with  CHECKBOXes-->
+    <script type="text/html" id='testQuestion-checkbox-js'>
+
+        <p class="quiz-question__question"> <%= question.text %> </p>
+        <ul class="quiz-question__options">
+            <% question.answers.forEach(function(item,key,list){ %>
+            <li class="quiz-question__option">
+                <label>
+                    <input class="quiz-question__input" type="checkbox" name=" checkbox <%= key %> ">
+                        <span class="quiz-question__title">
+                            <%= item %>
+                        </span>
+                </label>
+            </li>
+            <% }); %>
+        </ul>
+
+    </script>
+<!--END for question with  CHECKBOXes-->
+<!--------------------------------------------------------------------->
+<!--for buttons-->
+<script type="text/html" id="btn-test-js">
+    <button type="submit" id="btn-continue" class=" btn btn-default center-block btn-register" >Далее</button>
+</script>
+    <!--END for buttons-->
+<!--------------------------------------------------------------------->
+
+<!--REsult-->
+<script type="text/html" id="result-js">
+    <section class="center-block " ><h1>Страница с результатами</h1></section>
+</script>
+<!--END Result-->
+<!--END TEMPLATES-->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script scr="/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/underscore.js"></script>
+<script src="/js/backbone.min.js"></script>
+
+<script src="/js/webschool.js"></script>
+
+
+
+</body>
+</html>

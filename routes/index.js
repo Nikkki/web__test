@@ -4,7 +4,6 @@ var path = require('path');
 var fs = require('fs');
 var Validator = require('./../public/javascripts/controller/validateForms');
 var SubscriberDB = require('../models/subscriber').Subscriber;
-//var geolocation = require('geolocation');
 var sendmail = require('sendmail')();
 useragent = require('express-useragent');
 
@@ -14,7 +13,7 @@ mongoose.connect('mongodb://localhost:27017/COURSES');
 
  //GET home page
 router.get('/', function(req, res, next) {
-  res.sendFile('/../dist/index.html');
+
 });
 //POSt form validation
 router.post('/subscribe', function(req, res) {
@@ -62,7 +61,7 @@ router.post('/subscribe', function(req, res) {
             subject: 'Заявка на PHP/JS обучение с edu.apibest.com',
             content: 'Здравствуйте,' + '\n'+
                 'поступила заявка на обучение.' + '\n'+'\n'+
-                'Имя = ' +  subscriber.username + '\n'+ge
+                'Имя = ' +  subscriber.username + '\n'+
                 'Телефон = ' + subscriber.phoneNum + '\n'+
                 'Email = ' + subscriber.email + '\n' +
                 'ip = ' + subscriber.ip + '\n' +
