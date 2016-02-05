@@ -1,0 +1,2 @@
+var diagramVennSvg = require('./svg/diagramVennSvg');
+var DiagramVennSvgModel = require()

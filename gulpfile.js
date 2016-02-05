@@ -3,6 +3,8 @@ var gulp = require('gulp'),
 	connect = require('gulp-connect'),
 	livereload = require('gulp-livereload'),
  	browserify = require('gulp-browserify'),
+	diagramVennBrowserify = require('gulp-browserify'),
+	testControllers = require('gulp-browserify'),
 	rename = require("gulp-rename");
 
 
@@ -20,6 +22,7 @@ gulp.task('css', function() {
   .pipe(connect.reload());
 });
 
+
 /* connect */
 gulp.task('connect', function() {
   connect.server({
@@ -35,20 +38,41 @@ gulp.task('html', function () {
     .pipe(connect.reload());
 });
 
-
+/*browserify*/
 gulp.task('browserify', function () {
   return gulp.src('./public/javascripts/index.js')
     .pipe(rename('webschool.js'))
     .pipe(browserify({debug: true}))
     .pipe(gulp.dest('dist/js'))
     .pipe(connect.reload());
-})
+});
 
+/*Venn`s diagram*/
+gulp.task('diagramVennBrowserify', function () {
+  return gulp.src('./public/svg-js/diagramVenn/diagramVenn.js')
+    .pipe(rename('diagramVenn.js'))
+    .pipe(browserify({debug: true}))
+    .pipe(gulp.dest('dist/js'))
+    .pipe(connect.reload());
+});
+
+/*test controllers*/ 
+
+gulp.task('testControllers', function () {
+  return gulp.src('./public/testControllers/index.js')
+    .pipe(rename('testControllers.js'))
+    .pipe(browserify({debug: true}))
+    .pipe(gulp.dest('dist/js'))
+    .pipe(connect.reload());
+});
 
 gulp.task('watch', function (){
 	gulp.watch(['./dist/quiz.html'], ['html']);
   	gulp.watch('./public/javascripts/**/*.js', ['browserify']);
+	gulp.watch('./public/testControllers/js/*.js', ['testControllers']);
+	gulp.watch('./public/svg-diagramVenn/diagramVenn/js/*.js', ['diagramVennBrowserify']);
 	gulp.watch(['./public/stylesheets/**/*.scss'], ['css']);
 })
-
+gulp.task('diagramVenn', ['watch', 'diagramVennBrowserify']);
+gulp.task('diagramVenn', ['watch', 'testControllers']);
 gulp.task('build', ['connect', 'html', 'sass', 'css', 'browserify', 'watch']);

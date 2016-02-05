@@ -4,7 +4,10 @@ var mongoose = require('mongoose');
 var simpleTests = mongoose.Schema({
     text:  String,
     answers: Array,
-    kind: String /*kind of test: with checkboxes or radios*/
+    amountOfDiagrams: Number,
+    kind: String,    /*kind of test: with checkboxes or radios*/
+    callback: Array
+
 });
 
 var testPHP = mongoose.model('testPHP', simpleTests);

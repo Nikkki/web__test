@@ -1,0 +1,3 @@
+var diagramVennSvg = require('./js/diagramVennSvg');
+var DiagramVennModel = require('./js/DiagramVennModel');
+var DiagramVennController = require('./js/DiagramVennController');

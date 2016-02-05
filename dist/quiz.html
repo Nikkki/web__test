@@ -9,23 +9,27 @@
     <!-- Bootstrap -->
     <link href="/styles/main.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- HTML5 Shim and Respond.diagramVenn IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.diagramVenn doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.diagramVenn"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.diagramVenn/1.4.2/respond.min.diagramVenn"></script>
     <![endif]-->
 </head>
 <body>
 <section class="container-fluid ">
     <div class="row block-logo"><img src="/img/logo2.png" alt="Logo" class=" logo img-responsive center-block"></div>
     <div class="clearfix"></div>
-    <div id="test"></div>
+    <div id="test" class="container"></div>
     <div id="render-test-btn"></div>
 
 
 </section>
 <footer class="container-fluid footer"></footer>
+
+
+
+
 
 <!--TEMPLATES-->
     <!--home page-->
@@ -53,10 +57,8 @@
             <% question.answers.forEach(function(item,key,list){ %>
             <li class="quiz-question__option">
                 <label>
-                    <input class="quiz-question__input" type="checkbox" name=" checkbox <%= key %> ">
-                        <span class="quiz-question__title">
-                            <%= item %>
-                        </span>
+                    <input class="quiz-question__input" type="checkbox" value="<%= key %>" name=" checkbox <%= key %> ">
+                    <span class="quiz-question__title"><%= item %></span>
                 </label>
             </li>
             <% }); %>
@@ -65,12 +67,406 @@
     </script>
 <!--END for question with  CHECKBOXes-->
 <!--------------------------------------------------------------------->
-<!--for buttons-->
+<!-- for question with  Radio-->
+<script type="text/html" id='testQuestion-radio-js'>
+    <section class="quiz-question"></section>
+    <p class="quiz-question__question"> <%= question.text %> </p>
+    <ul class="quiz-question__options">
+        <% question.answers.forEach(function(item,key,list){ %>
+        <li class="quiz-question__option">
+            <label>
+                <input class="quiz-question__input" type="radio" value="<%= key %>" name="<%= question.kind  %> ">
+                <span class="quiz-question__title"><%= item %></span>
+            </label>
+        </li>
+        <% }); %>
+    </ul>
+</script>
+<!--END for question with  Radio-->
+<!--------------------------------------------------------------------->
+<!--QUESTION with textarea-->
+<script type="text/html" id="testQuestions-textarea-js">
+    <section class="quiz-question">
+        <p class="quiz-question__question"> <%= question.text %> </p>
+            <textarea class="quiz-question__textarea" name="textarea"></textarea>
+    </section>
+</script>
+<!--END--QUESTION with textarea-->
+<!--------------------------------------------------------------------->
+<!--QUESTION with Venn`s diagram-->
+
+<script type="text/html" id="testQuestions-diagramVenn-js">
+
+    <section class="quiz-question row">
+        <p class="quiz-question__question"> <%= question.text %> </p>
+        <% for(var i = 0; i < question.amountOfDiagrams; i++){ %>
+            <div class="diagramTest__i col-md-3" data-name-diagramvenn="diagramTest__i<%= i %>-js">
+                <svg width="210px" height="210px" id="diagramSvg" class="diagramSvg diagramSvg<%= i %>-js" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 119.4 79.4" style="enable-background:new 0 0 119.4 79.4;" xml:space="preserve">
+                    <g id="diagramSvg__left" class="diagramSvg__left" >
+                        <path id="XMLID_55_" data-prop-js="leftPart" data-prop-diagramVenn="false" class="st2" d="M40,39.7c0-14.6,7.9-27.4,19.7-34.3C53.8,2,47,0,39.7,0C17.8,0,0,17.8,0,39.7
+                            s17.8,39.7,39.7,39.7c7.3,0,14.1-2,20-5.4C47.9,67.1,40,54.4,40,39.7z"/>
+                    </g>
+
+                    <g id="diagramSvg__right"  class="diagramSvg__right" >
+                        <path id="XMLID_59_" data-prop-js="rightPart" class="st1" d="M79.7,0c-7.3,0-14.1,2-20,5.4c11.8,6.9,19.7,19.7,19.7,34.3S71.5,67.1,59.7,74
+                            c5.9,3.4,12.7,5.4,20,5.4c21.9,0,39.7-17.8,39.7-39.7S101.6,0,79.7,0z"/>
+                    </g>
+                    <g id="diagramSvg__inner"  class="diagramSvg__inner" >
+                        <path id="XMLID_60_" data-prop-js="innerPart" class="st0" d="M79.4,39.7c0-14.6-7.9-27.4-19.7-34.3C47.9,12.3,40,25.1,40,39.7S47.9,67.1,59.7,74
+                    C71.5,67.1,79.4,54.4,79.4,39.7z"/>
+                    </g>
+                </svg>
+
+                <!-- diagramVenn использует value для проверки на правльность отвеченного теста-->
+                <select name="nameOfUnion_js" id="nameOfUnion" class="center-block">
+                    <option value="inner_join">Inner Join</option>
+                    <option value="left_outer_join">Left outer join</option>
+                    <option value="right_outer_join">Right outer join</option>
+                    <option value="full_outer_join">Full outer Join</option>
+                </select>
+
+            </div>
+        <% }; %>
+    </section>
+    <div class="clearfix"></div>
+
+</script>
+
+<!-- NETWORK -->
+<script type="text/html" id="testQuestions-network-js">
+    <section class="quiz-question row center-block" >
+        <p class="quiz-question__question"> <%= question.text %> </p>
+        <div class="col-md-2">
+            <img src="/img/server.png " alt="DB server" class="img-responsive">
+            <p>DB server</p>
+        </div>
+
+        <!-- ---------->
+        <div class="col-md-1">
+            <select name="select1" >
+                <% question.answers.forEach(function(item,key,list){ %>
+                <option value="<%= item %>"><%= item %></option>
+                <% }); %>
+            </select>
+            <select name="select2" >
+                <% question.answers.forEach(function(item,key,list){ %>
+                <option value="<%= item %>"><%= item %></option>
+                <% }); %>
+            </select>
+        </div>
+        <!-- ---------- -->
+        <div class="col-md-2">
+            <img src="/img/server.png" alt="WEb server" class="img-responsive">
+            <p>Web server</p>
+        </div>
+        <!-- ---------->
+        <div class="col-md-1">
+            <select name="select3" >
+                <% question.answers.forEach(function(item,key,list){ %>
+                <option value="<%= item %>"><%= item %></option>
+                <% }); %>
+            </select>
+            <select name="select4" >
+                <% question.answers.forEach(function(item,key,list){ %>
+                <option value="<%= item %>"><%= item %></option>
+                <% }); %>
+            </select>
+        </div>
+        <!-- ---------- -->
+        <div class="col-md-2">
+            <img src="/img/comp.png" alt="WEb server" class="img-responsive">
+            <p>Web browser</p>
+        </div>
+        <!-- ---------->
+        <div class="col-md-1">
+            <select name="select5" >
+                <% question.answers.forEach(function(item,key,list){ %>
+                <option value="<%= item %>"><%= item %></option>
+                <% }); %>
+            </select>
+            <select name="select6" >
+                <% question.answers.forEach(function(item,key,list){ %>
+                <option value="<%= item %>"><%= item %></option>
+                <% }); %>
+            </select>
+        </div>
+        <!-- ---------- -->
+        <div class="col-md-2">
+            <img src="/img/server.png" alt="DNS server" class="img-responsive">
+            <p>DNS server</p>
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+
+    <div class="quiz-question__textarea row">
+        <div class="col-md-6 col col-md-offset-3">
+            <input type="text" class="">
+        </div>
+    </div>
+</script>
+
+<!-- END NETWORK -->
+<!--TABLES-->
+<script type="text/html" id="testQuestions-tables-js">
+    <section class="quiz-question row center-block" >
+        <table class="table-huge table-huge-js">
+            <tbody>
+            <tr>
+                <td colspan="2">Переменные</td>
+                <td colspan="4">Промежуточные функции</td>
+                <td>Ответ</td>
+            </tr>
+            <tr>
+                <td>x</td>
+                <td>y</td>
+                <td><span class="overline">x</span></td>
+                <td>x&#8744y</td>
+                <td><span class="overline">x&#8744y</span></td>
+                <td><span class="overline">x&#8744y </span>&#8744x</td>
+                <td>F(x,y) = <span class="overline">x</span>&#8743y&#8744<span class="overline">x&#8744y</span>&#8744x</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>
+                    <select name="table_select00" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="table_select01" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+
+                    <select name="table_select02" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+
+                    <select name="table_select03" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+
+                    <select name="table_select04" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>
+                    <select name="table_select10" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="table_select11" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="table_select12" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select></td>
+                <td>
+                    <select name="table_select13" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="table_select14" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>
+                    <select name="table_select20" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="table_select21" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select></td>
+                <td>
+                    <select name="table_select22" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select></td>
+                <td>
+                    <select name="table_select23" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select></td>
+                <td>
+                    <select name="table_select24" >
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <!-- END HUGE table-->
+        <!-- small tables-->
+        <section class="quiz-question row center-block" >
+
+            <table class='table-small table-small-or-js' >
+                <tr>
+                    <td>OR</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <select name="table-small1_select00" >
+                            <option value="null">?</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="table-small1_select01" >
+                            <option value="null">?</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>
+                        <select name="table-small1__select10" >
+                            <option value="null">?</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="table-small1__select11" >
+                            <option value="null">?</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table class='table-small table-small-and-js'>
+                <tr>
+                    <td>AND</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <select name="table_-small2_select00" >
+                            <option value="null">?</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="table_-small2_select00" >
+                            <option value="null">?</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>
+                        <select name="table-small2__select10" >
+                            <option value="null">?</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="table-small2__select11" >
+                            <option value="null">?</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <!-- END small tables-->
+
+    </section>
+</script>
+<!--END TABLES-->
+
+<!-- For buttons-->
 <script type="text/html" id="btn-test-js">
-    <button type="submit" id="btn-continue" class=" btn btn-default center-block btn-register" >Далее</button>
+    <button type="submit" id="btn-continue" class="btn-continue-js btn btn-default center-block btn-register" >Далее</button>
 </script>
     <!--END for buttons-->
 <!--------------------------------------------------------------------->
+<!--PROGRESS-->
+<script type="text/html" id="progress-view-js">
+    <section class="test-progress">
+        <span>Вопрос <%= numQuestion %> из <%= amountOfQuestions %> </span>
+    </section>
+</script>
+<!--END--OF-PROGRESS-->
+<!--------------------------------------------------------------------->
+
+
+
+
+<!--<script src="<%=  url  %>"> </script>-->
 
 <!--REsult-->
 <script type="text/html" id="result-js">
@@ -78,10 +474,10 @@
 </script>
 <!--END Result-->
 <!--END TEMPLATES-->
-
+<script src="/js/jquery.min.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script scr="/js/jquery.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/underscore.js"></script>
 <script src="/js/backbone.min.js"></script>

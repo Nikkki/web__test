@@ -1,6 +1,7 @@
 body {
   background: url(../img/bgi.jpg) no-repeat center center fixed #EB8E1C;
   background-size: cover;
+  color: #fff !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -5687,6 +5688,57 @@ span.error {
   text-decoration: none;
   background-color: #000;
   border-radius: 4px; }
+
+.diagramSvg {
+  width: 200px;
+  height: 200px;
+  padding: 11px; }
+
+.diagramSvg__inner,
+.diagramSvg__left,
+.diagramSvg__right {
+  display: block;
+  width: 100px;
+  height: 90%; }
+
+.diagramSvg > g {
+  width: 100px;
+  height: 90%;
+  cursor: pointer; }
+
+.diagramSvg > g path {
+  -webkit-transition: all 0.3s cubic-bezier(0.5, -1, 0.5, 2);
+  -o-transition: all 0.3s cubic-bezier(0.5, -1, 0.5, 2);
+  transition: all 0.3s cubic-bezier(0.5, -1, 0.5, 2); }
+
+.diagramSvg > g path:hover {
+  transform: scale(1.05, 1.05) translate(-3px, -2px); }
+
+.quiz-question .table-huge {
+  width: 350px;
+  border: 1px solid #000;
+  border-collapse: collapse; }
+
+.quiz-question .table-huge tr td {
+  height: 30px;
+  border: 1px solid #000;
+  text-align: center; }
+
+.overline {
+  text-decoration: overline; }
+
+.quiz-question .table-huge tr td:last-child {
+  width: 200px; }
+
+.quiz-question .table-small {
+  border: 1px solid #000;
+  border-collapse: collapse; }
+
+.quiz-question .table-small tr td {
+  height: 30px;
+  width: 35px;
+  border: 1px solid #000;
+  text-align: center; }
 
 .is-hidden {
   display: none; }

@@ -1,12 +1,29 @@
-var question = JSON.parse(sessionStorage.getItem('test'));
-console.log('это nextTest');
 module.exports = function (router) {
+    var NextTest;
+    NextTest = Backbone.View.extend({
+        template: {
+            checkbox: _.template($('#testQuestion-checkbox-js').html()),
+            radio: _.template($('#testQuestion-radio-js').html()),
+            textarea: _.template($('#testQuestions-textarea-js').html()),
+            diagramVenn: _.template($('#testQuestions-diagramVenn-js').html()),
+            network: _.template($('#testQuestions-network-js').html()),
+            tables: _.template($('#testQuestions-tables-js').html())
+        },
 
-    var NextTest = Backbone.View.extend({
-        template: _.template($('#testQuestion-checkbox-js').html()),
 
         render: function () {
-                $(this.el).html(this.template({question: question}));
+            console.log('Рендеринг самого теста');
+
+            var question = this.model;
+            var amountOfQuestions = sessionStorage.getItem('amountOfQuestions');
+            var numTestPage = sessionStorage.getItem('numTestPage');
+            if (question.attributes._id !== '') {
+                var kind = question.attributes.kind;
+                //kind теста должен совпадать с название template[тип]
+                this.$el.html(this.template[kind]({question: this.model.toJSON()}));
+            } else {
+                router.navigate("quiz/questions/result", {trigger: true})
+            }
             return this.el;
         }
     });

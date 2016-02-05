@@ -3,8 +3,6 @@ var router = new Router();
 var BtnTest = require('./view/test/BtnTest');
 var NextText =require('./view/test/NextTest');
 var Views= require('./view/testView.js')(router);
-var startingTest = require('./controller/test/startingTest')(router);
-
 
 
 

@@ -1,0 +1,32 @@
+.diagramSvg{
+  width: 200px;
+  height: 200px;
+  padding: 11px;
+
+};
+
+
+.diagramSvg__inner,
+.diagramSvg__left,
+.diagramSvg__right {
+  display: block;
+  width: 100px;
+  height: 90%;
+}
+
+
+.diagramSvg > g {
+  width: 100px;
+  height: 90%;
+  cursor: pointer;
+}
+
+.diagramSvg > g path {
+  -webkit-transition: all .3s cubic-bezier(.5, -1, .5, 2);
+  -o-transition: all .3s cubic-bezier(.5, -1, .5, 2);
+  transition: all .3s cubic-bezier(.5, -1, .5, 2);
+}
+.diagramSvg > g path:hover {
+  transform: scale(1.05, 1.05) translate(-3px, -2px);
+}
+

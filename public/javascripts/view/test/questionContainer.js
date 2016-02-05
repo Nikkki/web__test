@@ -1,6 +1,7 @@
 module.exports = function(router) {
     var BtnTest = require('./BtnTest')(router);
     var NextTest = require('./NextTest')(router);
+    var ProgressView = require('./ProgressView')(router);
 
     var QuestionContainer = Backbone.View.extend({
         el: $('#test'),
@@ -9,19 +10,23 @@ module.exports = function(router) {
         },
 
         moveToNextTest: function () {
+            console.log('click');
             var numTestPage = JSON.parse(sessionStorage.getItem('numTestPage'));
-            console.log('numTestPage from questionCont ' + numTestPage);
+
             numTestPage++;
             sessionStorage.setItem('numTestPage', JSON.stringify(numTestPage));
             router.navigate("quiz/questions/" + JSON.stringify(numTestPage) , {trigger: true, replace: true});
-            console.log('click');
         },
         render: function () {
             console.log('Вызов для rendering`га View');
             var btnTest = new BtnTest();
-            var nextTest = new NextTest();
+            var nextTest = new NextTest({
+                model: this.model
+            });
+            var progressView = new ProgressView();
 
             this.$el.html('');
+            this.$el.append(progressView.render());
             this.$el.append(nextTest.render());
             this.$el.append(btnTest.render());
 
