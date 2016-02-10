@@ -74,12 +74,17 @@ var testTypes = {
     }()),
 
     textareaPHP: (function () {
-        console.log('d ntrcn');
         var answers = [];
         var code = $('.CodeMirror-line').text();
         answers.push(code);
 
 
+        return answers;
+    }()),
+
+    textarea: (function () {
+        var answers = [];
+        answers.push($('.textarea-js').val());
         return answers;
     }())
 
