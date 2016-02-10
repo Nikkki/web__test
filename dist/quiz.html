@@ -8,6 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="/styles/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/codemirror.css">
 
     <!-- HTML5 Shim and Respond.diagramVenn IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.diagramVenn doesn't work if you view the page via file:// -->
@@ -211,7 +212,7 @@
 <!--TABLES-->
 <script type="text/html" id="testQuestions-tables-js">
     <section class="quiz-question row center-block" >
-        <table class="table-huge table-huge-js">
+        <table class="table-huge table-huge-js" name="table-huge">
             <tbody>
             <tr>
                 <td colspan="2">Переменные</td>
@@ -225,7 +226,7 @@
                 <td>x&#8744y</td>
                 <td><span class="overline">x&#8744y</span></td>
                 <td><span class="overline">x&#8744y </span>&#8744x</td>
-                <td>F(x,y) = <span class="overline">x</span>&#8743y&#8744<span class="overline">x&#8744y</span>&#8744x</td>
+                <td>F(x,y) = <span class="overline">x</span>&#8743y&#8744<span class="overline">x<span class="logic-sign">&#8744</span>y</span><span class="logic-sign">&#8744</span>x</td>
             </tr>
             <tr>
                 <td>0</td>
@@ -358,7 +359,7 @@
         <!-- small tables-->
         <section class="quiz-question row center-block" >
 
-            <table class='table-small table-small-or-js' >
+            <table class='table-small table-small-or-js' name="table-small-or">
                 <tr>
                     <td>OR</td>
                     <td>1</td>
@@ -384,14 +385,14 @@
                 <tr>
                     <td>0</td>
                     <td>
-                        <select name="table-small1__select10" >
+                        <select name="table-small1_select10" >
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
                         </select>
                     </td>
                     <td>
-                        <select name="table-small1__select11" >
+                        <select name="table-small1_select11" >
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -401,7 +402,7 @@
             </table>
 
 
-            <table class='table-small table-small-and-js'>
+            <table class='table-small table-small-and-js' name="table-small-and">
                 <tr>
                     <td>AND</td>
                     <td>1</td>
@@ -410,14 +411,14 @@
                 <tr>
                     <td>1</td>
                     <td>
-                        <select name="table_-small2_select00" >
+                        <select name="table-small2_select00" >
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
                         </select>
                     </td>
                     <td>
-                        <select name="table_-small2_select00" >
+                        <select name="table-small2_select01" >
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -427,14 +428,14 @@
                 <tr>
                     <td>0</td>
                     <td>
-                        <select name="table-small2__select10" >
+                        <select name="table-small2_select10" >
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
                         </select>
                     </td>
                     <td>
-                        <select name="table-small2__select11" >
+                        <select name="table-small2_select11" >
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -448,8 +449,59 @@
 </script>
 <!--END TABLES-->
 
+<!----------------------------------------------->
+<!--Textarea JS-->
+<script type="text/tamplate" id = "testQuestions-textareaJS-js">
+    <section class="quiz-question row center-block">
+    <div>
+        <p>&lt; div id=&Prime;my&Prime; &gt;</p>
+        <p>Lorem Ipsum...</p>
+        <p>&lt;&frasl;div&gt;</p>
+    </div>
+    <textarea name="textarea" id="codemirror-js" class="codemirror-js" cols="30" rows="10"></textarea>
+    </section>
+</script>
+
+
+<!--END  Textarea JS-->
+<!----------------------------------------------->
+<!----------------------------------------------->
+<!--Textarea HTML-->
+<script type="text/tamplate" id = "testQuestions-textareaHTML-js">
+    <section class="quiz-question row center-block">
+<div>
+    <p>container &#046;my&#046;friend li &#123;</p>
+    <p>background-color&#058; &#035;0f0&#059;</p>
+    <p>}</p>
+</div>
+<textarea name="textarea" id="codemirror-js" class="codemirror-js" cols="30" rows="10"></textarea>
+    </section>
+</script>
+<!--END  Textarea HTML-->
+<!----------------------------------------------->
+<!----------------------------------------------->
+<!--Textarea PHP-->
+
+<script type="text/tamplate" id = "testQuestions-textareaPHP-js">
+    <section class="quiz-question row center-block">
+<div>
+<div>
+    <p>$o = new Shape&lang;&rang;</p>
+    <p>$o-&gt;transformToCircle&lang;&rang;-&gt;show&lang;&rang;</p>
+</div>
+<textarea name="textarea" id="codemirror-js" class="codemirror-js" cols="30" rows="10" value="class Shape { }"></textarea>
+    </section>
+</script>
+
+<!--END  Textarea PHP-->
+<!----------------------------------------------->
+
+
+
+
+
 <!-- For buttons-->
-<script type="text/html" id="btn-test-js">
+<script type="text/tamplete" id="btn-test-js">
     <button type="submit" id="btn-continue" class="btn-continue-js btn btn-default center-block btn-register" >Далее</button>
 </script>
     <!--END for buttons-->

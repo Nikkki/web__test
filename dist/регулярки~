@@ -1,0 +1,4 @@
+(public\s+)?function\s+(transformToCircle)\s*\(\s*\)\s*\{[\s]?(.*\s)*(return \$this;)\s*\}
+
+
+(public\s+)?function\s+(show)\s*\(\s*\)\s*\{(.*\s)*\}

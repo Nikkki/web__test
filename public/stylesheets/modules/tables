@@ -14,6 +14,12 @@
 
 .overline{
   text-decoration: overline;
+  letter-spacing: -2px;
+  padding-right: 2px;
+  margin-right: 4px;
+}
+.logic-sign{
+  color: #c3ff28;
 }
 
 .quiz-question .table-huge tr td:last-child{

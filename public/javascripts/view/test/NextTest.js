@@ -7,13 +7,14 @@ module.exports = function (router) {
             textarea: _.template($('#testQuestions-textarea-js').html()),
             diagramVenn: _.template($('#testQuestions-diagramVenn-js').html()),
             network: _.template($('#testQuestions-network-js').html()),
-            tables: _.template($('#testQuestions-tables-js').html())
+            tables: _.template($('#testQuestions-tables-js').html()),
+            textareaJS: _.template($('#testQuestions-textareaJS-js').html()),
+            textareaHTML: _.template($('#testQuestions-textareaHTML-js').html()),
+            textareaPHP: _.template($('#testQuestions-textareaPHP-js').html())
         },
-
 
         render: function () {
             console.log('Рендеринг самого теста');
-
             var question = this.model;
             var amountOfQuestions = sessionStorage.getItem('amountOfQuestions');
             var numTestPage = sessionStorage.getItem('numTestPage');

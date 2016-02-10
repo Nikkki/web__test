@@ -7,7 +7,6 @@ var questionContainer;
 
 var UsersAnswersmodel = require('../model/UsersAnswersmodel');
 
-
 var Router = Backbone.Router.extend({
     routes: {
         "quiz(/)": 'startPage', // Начальная страница
@@ -129,9 +128,7 @@ var Router = Backbone.Router.extend({
 
     result: function (){
         console.log('results');
-
     },
-
     initialize: function () {
         if (typeof Views === 'undefined') {
             Views = viewsFactory(this);

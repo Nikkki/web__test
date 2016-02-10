@@ -57,6 +57,22 @@ var DiagramVennController = function (model) {
             }
         );
     });
+
+    /*
+    * Добавление в sessionStorage ответа
+    * */
+    $('#btn-continue').on('click', function (event) {
+        var answersArr = JSON.parse(sessionStorage.getItem('answers'));
+        var arrLength = answersArr.length;
+        conso
+        console.log(modelsArr[0].nameOfUnion_js);
+        console.log(answersArr);
+        console.log(answersArr[arrLength - 1] );
+        answersArr[arrLength - 1].answers = modelsArr;
+        console.log(answersArr);
+        sessionStorage.setItem('answers', JSON.stringify(answersArr));
+    });
+
     return modelsArr;
 };
 module.exports  = DiagramVennController;
