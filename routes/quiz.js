@@ -102,6 +102,21 @@ var quizRoute = function (root) {
             var correctAnswers = docs;
             /*на сервер приходят значения ответов с типом string,  поэтому и надо перевести их в number*/
 
+            switch (a) {
+                case 3:
+                    alert( 'Маловато' );
+                    break;
+                case 4:
+                    alert( 'В точку!' );
+                    break;
+                case 5:
+                    alert( 'Перебор' );
+                    break;
+                default:
+                    alert( 'Я таких значений не знаю' );
+            }
+
+
 /*проверка ответов для RADIO & CHECKBOX*/
             usersAnswers.forEach(function (item, i, arr) {
                 if (item.kind == 'checkbox') {
@@ -278,10 +293,10 @@ var quizRoute = function (root) {
                 if (item.kind === 'textareaPHP') {
                     console.log(usersAnswers);
 
-                    var pattern1 = /(public\s+)?function\s+(transformToCircle)\s*\(\s*\)\s*\{[\s]?(.*\s)*(return \$this;)\s*\}/gim;
-                    var pattern2 = /(public\s+)?function\s+(show)\s*\(\s*\)\s*\{(.*\s)*\}/gim;
+                    var pattern1 = /(public\s+)?function\s+(transformToCircle)\s*\(\s*\)\s*\{[\s]?(.*\s)*(return \$this;)\s*\}/gm;
+                    var pattern2 = /(public\s+)?function\s+(show)\s*\(\s*\)\s*\{(.*\s*)*\}/gm;
                     arrCorrectUserAnswers.push(pattern1.test(item.answers[0]));
-                    arrCorrectUserAnswers.push(pattern2.test(item.answers[0]));
+                    arrCorrectUserAnswers.push(pattern2.test(String(item.answers[0])));
 
                 }
             });
