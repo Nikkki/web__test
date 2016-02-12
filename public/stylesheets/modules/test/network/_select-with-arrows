@@ -1,0 +1,28 @@
+.b-select-with-arrows{
+  display: inline-block;
+  position: relative;
+  width: 105px;
+  top: -57px;
+}
+
+.select-with-arrows{
+  display: block;
+  //position: absolute;
+  //width: 105px;
+
+  &__arrow{
+    display: inline-block;
+    opacity: .5;
+    &:hover{
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+
+  & select{
+    display: inline-block;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+}

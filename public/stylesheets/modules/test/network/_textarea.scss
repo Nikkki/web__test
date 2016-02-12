@@ -1,0 +1,22 @@
+.b-textarea {
+  display: block;
+  margin: 0 auto;
+  width: 1024px;
+  position: relative;
+  &__i{
+    margin: 0 auto;
+    display: block;
+    position: relative;
+  }
+  &__text{
+    display: inline-block;
+  }
+  &__textarea{
+    display: inline-block;
+    color: #000;
+    width: 400px;
+    padding: 5px 10px;
+    margin: 10px auto;
+  }
+}
+

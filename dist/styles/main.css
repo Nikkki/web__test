@@ -5746,6 +5746,124 @@ span.error {
   border: 1px solid #000;
   text-align: center; }
 
+.b-select-with-arrows {
+  display: inline-block;
+  position: relative;
+  width: 105px;
+  top: -57px; }
+
+.select-with-arrows {
+  display: block; }
+  .select-with-arrows__arrow {
+    display: inline-block;
+    opacity: .5; }
+    .select-with-arrows__arrow:hover {
+      opacity: 1;
+      cursor: pointer; }
+  .select-with-arrows select {
+    display: inline-block;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; }
+
+.network {
+  width: 1024px;
+  position: relative;
+  display: block; }
+  .network .b-select-with-arrows {
+    margin: 0 18px 0 18px; }
+
+.system-unit {
+  display: inline-block;
+  height: 146px;
+  width: 112px; }
+
+.monitor {
+  display: inline-block; }
+  .monitor__img {
+    height: 150px;
+    width: 150px;
+    position: relative;
+    display: block;
+    margin: 0 auto; }
+
+.b-textarea {
+  display: block;
+  margin: 0 auto;
+  width: 1024px;
+  position: relative; }
+  .b-textarea__i {
+    margin: 0 auto;
+    display: block;
+    position: relative; }
+  .b-textarea__text {
+    display: inline-block; }
+  .b-textarea__textarea {
+    display: inline-block;
+    color: #000;
+    width: 400px;
+    padding: 5px 10px;
+    margin: 10px auto; }
+
+.b-select-with-arrows {
+  display: inline-block;
+  position: relative;
+  width: 105px;
+  top: -57px; }
+
+.select-with-arrows {
+  display: block; }
+  .select-with-arrows__arrow {
+    display: inline-block;
+    opacity: .5; }
+    .select-with-arrows__arrow:hover {
+      opacity: 1;
+      cursor: pointer; }
+  .select-with-arrows select {
+    display: inline-block;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; }
+
+.network {
+  width: 1024px;
+  position: relative;
+  display: block; }
+  .network .b-select-with-arrows {
+    margin: 0 18px 0 18px; }
+
+.system-unit {
+  display: inline-block;
+  height: 146px;
+  width: 112px; }
+
+.monitor {
+  display: inline-block; }
+  .monitor__img {
+    height: 150px;
+    width: 150px;
+    position: relative;
+    display: block;
+    margin: 0 auto; }
+
+.b-textarea {
+  display: block;
+  margin: 0 auto;
+  width: 1024px;
+  position: relative; }
+  .b-textarea__i {
+    margin: 0 auto;
+    display: block;
+    position: relative; }
+  .b-textarea__text {
+    display: inline-block; }
+  .b-textarea__textarea {
+    display: inline-block;
+    color: #000;
+    width: 400px;
+    padding: 5px 10px;
+    margin: 10px auto; }
+
 .is-hidden {
   display: none; }
 

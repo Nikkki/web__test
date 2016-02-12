@@ -27,20 +27,27 @@
 //
 //module.exports = questions;
 
-/*
-* ['inner_join','left_outer_join','right_outer_join','full_outer_join']
-* amountOfDiagrams: 4
-* */
+
 
 /*
-* поле callback - это массив, туда вносим скрипты, которые нужно подгрузить
+*
 * */
 
 /*
 * kinds:
 * */
+//------------------------------------------------------------
+//-----------------VENN`S DIAGRAMS-------------------------------
+//поле callback - это массив, туда вносим скрипты, которые нужно подгрузить
 
+/*  вариант ответа
+ * ['inner_join','left_outer_join','right_outer_join','full_outer_join']
+ * amountOfDiagrams: 4
+ *
 /*
+
+
+
 * Правильный ответ для ДИАГРАММЫ ВЕННА:
 *
 var arr = [{
@@ -58,8 +65,10 @@ var arr = [{
  }];
 *
 * */
+//---------END--------VENN`S DIAGRAMS-------------------------------
 
-
+//------------------------------------------------------------------
+//------------TABLES
 /*
 * Правильные ответы для Таблиц
 * var arr = [
@@ -76,22 +85,50 @@ var arr = [{
  arrUserAnswer: [[1,1],[1,0]]
  }
  ];
-*  */
+
+ //-----END-------TABLES
+ /*--------------------------------------------------------------------------------
+ * NETWORKKKKKKKK
+  *
+ *Варианты ответов для select`a
+ * ['?', '1', '2', '3', '4', '5', '6']
+  *
+* CORRECT ANSWERS FOR TEST WITH NETWORK */
 //var arr = [
 //    {
-//        name: 'table-huge',
-//        arrUserAnswers: [[1,0,1,1,1],[1,1,0,0,1], [0,1,0,1,1], [0,1,0,1,1]]
+//     number: 4,
+//         arrowRight: true,
+//        arrowLeft: null
 //    },
 //    {
-//        name: 'table-small-and',
-//        arrUserAnswers: [[1,0],[0,0]]
+//     number: 3,
+//         arrowLeft: true,
+//        arrowRight: null
 //    },
 //    {
-//        name: 'table-small-or',
-//        arrUserAnswers: [[1,1],[1,0]]
-//    }
+//     number: 5,
+//         arrowRight: true,
+//        arrowLeft: null
+//    },
+//    {
+//     number: 2,
+//         arrowLeft: true,
+//        arrowRight: null
+//    }, {
+//     number: 0,
+//         arrowRight: true,
+//         arrowLeft: null
+//    },
+//    {
+//     number: 1,
+//         arrowLeft: true,
+//        arrowRight: null
+//   }
 //];
 
+//---------END--------NETWORKKKKKKKK
+
+//-----------QUESTIONS---WITH-----CODE
 
 ///* callback for textarea JS */
 //['/js/testControllers.js','/js/codemirror/codemirror.js', '/js/codemirror/javascript.js', '/js/codemirror/textareaJS.js']
@@ -103,3 +140,5 @@ var arr = [{
 //
 ///*callback for textarea PHP*/
 //    ['/js/testControllers.js','/js/codemirror/codemirror.js', '/js/codemirror/javascript.js', '/js/codemirror/textareaJS.js']
+
+//-------END----QUESTIONS---WITH-----CODE

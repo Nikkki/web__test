@@ -25,7 +25,7 @@ var DiagramVennController = function (model) {
     });
     /*For Diagram*/
     /*data('prop-js') является атрибутом тэга path в html;
-     также значение data('prop-diagramVenn') должно совпадать со свойствами модели этой диаграммы
+     также значение data('prop-_diagramVenn.scss') должно совпадать со свойствами модели этой диаграммы
      */
 
     var $diagramPart = $('.diagramSvg g');

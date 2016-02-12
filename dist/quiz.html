@@ -10,11 +10,11 @@
     <link href="/styles/main.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles/codemirror.css">
 
-    <!-- HTML5 Shim and Respond.diagramVenn IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.diagramVenn doesn't work if you view the page via file:// -->
+    <!-- HTML5 Shim and Respond._diagramVenn.scss IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond._diagramVenn.scss doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.diagramVenn"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.diagramVenn/1.4.2/respond.min.diagramVenn"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv._diagramVenn.scss"></script>
+    <script src="https://oss.maxcdn.com/libs/respond._diagramVenn.scss/1.4.2/respond.min._diagramVenn.scss"></script>
     <![endif]-->
 </head>
 <body>
@@ -119,7 +119,7 @@
                     </g>
                 </svg>
 
-                <!-- diagramVenn использует value для проверки на правльность отвеченного теста-->
+                <!-- _diagramVenn.scss использует value для проверки на правльность отвеченного теста-->
                 <select name="nameOfUnion_js" id="nameOfUnion" class="center-block">
                     <option value="inner_join">Inner Join</option>
                     <option value="left_outer_join">Left outer join</option>
@@ -136,81 +136,110 @@
 
 <!-- NETWORK -->
 <script type="text/html" id="testQuestions-network-js">
-    <section class="quiz-question row center-block" >
+    <section class="quiz-question row center-block network" >
+        <!-- ------------>
         <p class="quiz-question__question"> <%= question.text %> </p>
-        <div class="col-md-2">
-            <img src="/img/server.png " alt="DB server" class="img-responsive">
+        <div class="system-unit">
+            <img src="/img/server.png " alt="DB server" class="img-responsive system-unit__img">
             <p>DB server</p>
         </div>
-
         <!-- ---------->
-        <div class="col-md-1">
-            <select name="select1" >
+        <div class="b-select-with-arrows">
+            <div class="select-with-arrows" data-number-of-select="0">
+                <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
+                <select name="select1" class="select-js">
+                    <% question.answers.forEach(function(item,key,list){ %>
+                    <option value="<%= item %>"><%= item %></option>
+                    <% }); %>
+                </select>
+                <img src="/img/arrow_right.png" alt="arrow_right" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowRight">
+            </div>
+
+            <div class="select-with-arrows" data-number-of-select="1">
+                <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
+                <select name="select2" class="select-js">
                 <% question.answers.forEach(function(item,key,list){ %>
                 <option value="<%= item %>"><%= item %></option>
                 <% }); %>
             </select>
-            <select name="select2" >
-                <% question.answers.forEach(function(item,key,list){ %>
-                <option value="<%= item %>"><%= item %></option>
-                <% }); %>
-            </select>
+                <img src="/img/arrow_right.png" alt="arrow_right" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowRight">
+            </div>
         </div>
-        <!-- ---------- -->
-        <div class="col-md-2">
-            <img src="/img/server.png" alt="WEb server" class="img-responsive">
+        <!-- ------------>
+        <div class="system-unit">
+            <img src="/img/server.png" alt="WEb server" class=" img-responsive system-unit__img">
             <p>Web server</p>
         </div>
         <!-- ---------->
-        <div class="col-md-1">
-            <select name="select3" >
-                <% question.answers.forEach(function(item,key,list){ %>
-                <option value="<%= item %>"><%= item %></option>
-                <% }); %>
-            </select>
-            <select name="select4" >
-                <% question.answers.forEach(function(item,key,list){ %>
-                <option value="<%= item %>"><%= item %></option>
-                <% }); %>
-            </select>
+        <div class="b-select-with-arrows">
+            <div class="select-with-arrows" data-number-of-select="2">
+                <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
+                <select name="select3" class="select-js">
+                    <% question.answers.forEach(function(item,key,list){ %>
+                    <option value="<%= item %>"><%= item %></option>
+                    <% }); %>
+                </select>
+                <img src="/img/arrow_right.png" alt="arrow_right" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowRight">
+            </div>
+
+            <div class="select-with-arrows" data-number-of-select="3">
+                <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
+                <select name="select4" class="select-js">
+                    <% question.answers.forEach(function(item,key,list){ %>
+                    <option value="<%= item %>"><%= item %></option>
+                    <% }); %>
+                </select>
+                <img src="/img/arrow_right.png" alt="arrow_right" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowRight">
+
+            </div>
         </div>
         <!-- ---------- -->
-        <div class="col-md-2">
-            <img src="/img/comp.png" alt="WEb server" class="img-responsive">
+        <div class="monitor">
+            <img src="/img/comp.png" alt="WEb server" class="img-responsive monitor__img">
             <p>Web browser</p>
         </div>
         <!-- ---------->
-        <div class="col-md-1">
-            <select name="select5" >
-                <% question.answers.forEach(function(item,key,list){ %>
-                <option value="<%= item %>"><%= item %></option>
-                <% }); %>
-            </select>
-            <select name="select6" >
-                <% question.answers.forEach(function(item,key,list){ %>
-                <option value="<%= item %>"><%= item %></option>
-                <% }); %>
-            </select>
+        <div class="b-select-with-arrows">
+            <div class="select-with-arrows" data-number-of-select="4">
+                <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
+                <select name="select5" class="select-js">
+                    <% question.answers.forEach(function(item,key,list){ %>
+                    <option value="<%= item %>"><%= item %></option>
+                    <% }); %>
+                </select>
+                <img src="/img/arrow_right.png" alt="arrow_right" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowRight">
+            </div>
+            <div class="select-with-arrows" data-number-of-select="5">
+                <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
+                <select name="select6" class="select-js">
+                    <% question.answers.forEach(function(item,key,list){ %>
+                    <option value="<%= item %>"><%= item %></option>
+                    <% }); %>
+                </select>
+                <img src="/img/arrow_right.png" alt="arrow_right" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowRight">
+            </div>
         </div>
         <!-- ---------- -->
-        <div class="col-md-2">
-            <img src="/img/server.png" alt="DNS server" class="img-responsive">
+        <div class="system-unit">
+            <img src="/img/server.png" alt="DNS server" class="img-responsive system-unit__img">
             <p>DNS server</p>
         </div>
-    </section>
-
-    <div class="clearfix"></div>
-
-    <div class="quiz-question__textarea row">
-        <div class="col-md-6 col col-md-offset-3">
-            <input type="text" class="">
+<!--TExtareas-->
+        <div class="b-textarea">
+            <%  for(var i = 0; i < 6; i++){ %>
+            <div class="b-textarea__i">
+                <p class="b-textarea__text"> <%= i+1 %> </p>
+                <input type="text" class="b-textarea__textarea textarea-js" name="textarea<%=i%>" data-textarea-js="<%=i%>">
+            </div>
+            <%};%>
         </div>
-    </div>
+    </section>
 </script>
 
 <!-- END NETWORK -->
 <!--TABLES-->
 <script type="text/html" id="testQuestions-tables-js">
+    <p class="quiz-question__question"> <%= question.text %> </p>
     <section class="quiz-question row center-block" >
         <table class="table-huge table-huge-js" name="table-huge">
             <tbody>
@@ -356,7 +385,7 @@
             </tbody>
         </table>
         <!-- END HUGE table-->
-        <!-- small tables-->
+        <!-- small _tables.scss-->
         <section class="quiz-question row center-block" >
 
             <table class='table-small table-small-or-js' name="table-small-or">
@@ -443,9 +472,10 @@
                     </td>
                 </tr>
             </table>
-            <!-- END small tables-->
+            <!-- END small _tables.scss-->
 
     </section>
+
 </script>
 <!--END TABLES-->
 

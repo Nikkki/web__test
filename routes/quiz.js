@@ -16,51 +16,49 @@ var checkedUserAnswersArr = [];
  что кнопка "Далее" в каждом новом тесте
  прогружается позже после загрузки скриптов и
  она не будет ловиться jquery и нельзя обрабатывать события */
-//var testPHP1 = new TestPHP({
-//    callback: ['/js/testControllers.js'],
-//    text: 'Вопросик с ',
-//    kind: 'textarea'
-//    //amountOfDiagrams: 4
-//    //answers: ['1', '2', '3', '4', '5', '6']
-//});
-////
-//testPHP1.save(function (err, testPHP1 ) {
-//    if(err) throw err;
-//    console.log(testPHP1);
-//});
+var testPHP1 = new TestPHP({
+    callback: ['/js/testControllers.js'],
+    text: 'А Вы занимаетесь самообразованием? Что Вы выучили (узнали нового, какие прочитали книги) за последние 12 месяцев?',
+    kind: 'textarea'
+    //answers: ['inner_join','left_outer_join','right_outer_join','full_outer_join']
+});
+
+testPHP1.save(function (err, testPHP1 ) {
+    if(err) throw err;
+    console.log(testPHP1);
+});
+
+var correctAnswers1 = new correctAnswers({
+    //correctAnswers:  [
+    //    {
+    //        name: 'table-huge',
+    //        arrUserAnswers: [[1,0,1,1,1],[1,1,0,0,1], [0,1,0,1,1], [0,1,0,1,1]]
+    //    },
+    //    {
+    //        name: 'table-small-and',
+    //        arrUserAnswers: [[1,0],[0,0]]
+    //    },
+    //    {
+    //        name: 'table-small-or',
+    //        arrUserAnswer: [[1,1],[1,0]]
+    //    }
+    //],
+    kind: 'textarea',
+    _id: testPHP1._id
+});
+
 //
-//var correctAnswers1 = new correctAnswers({
-//    //correctAnswers:  [
-//    //    {
-//    //        name: 'table-huge',
-//    //        arrUserAnswers: [[1,0,1,1,1],[1,1,0,0,1], [0,1,0,1,1], [0,1,0,1,1]]
-//    //    },
-//    //    {
-//    //        name: 'table-small-and',
-//    //        arrUserAnswers: [[1,0],[0,0]]
-//    //    },
-//    //    {
-//    //        name: 'table-small-or',
-//    //        arrUserAnswers: [[1,1],[1,0]]
-//    //    }
-//    //],
-//    kind: 'textarea',
-//    _id: testPHP1._id
-//});
-//
-////
-//correctAnswers1.save(function (err, correctAnswers1 ) {
-//    if(err) throw err;
-//    console.log(correctAnswers1);
-//});
-//
-//
-//
-//
-//
-//TestPHP.find({},function(err, docs) {
-//   return docs;
-//});
+correctAnswers1.save(function (err, correctAnswers1 ) {
+    if(err) throw err;
+    console.log(correctAnswers1);
+});
+
+
+
+
+TestPHP.find({},function(err, docs) {
+   return docs;
+});
 
 
 
@@ -145,7 +143,7 @@ var quizRoute = function (root) {
                 /*на сервер приходят значения ответов с типом string,  поэтому и надо перевести их в number*/
                 usersAnswers.forEach(function (item, i, arr) {
                     correctAnswers.forEach(function (item2, i2, arr2){
-                        /*в объекте сохранеятся инфа о конкретном ответе пользователя*/
+                        /*в объекте будет сохранеяться инфа о конкретном ответе пользователя*/
                         var eachUsersAnswerObj = require('../models/UsersAnswersModel');
                     /*
                      * item  - массив ответов пользователя
@@ -155,7 +153,6 @@ var quizRoute = function (root) {
                             case 'checkbox':
                             case 'radio':
 
-                                console.log( 'checkbox или radio' );
                                 if (item.kind == 'radio') {
                                     var answ = parseInt( item.answers, 10);
                                     item.answers = [];
@@ -166,11 +163,15 @@ var quizRoute = function (root) {
                                         arr2.splice(i2, 1, parseInt(item2, 10));
                                     });
                                 }
-                                var amountOfIncorrectAnswers = 0;
+
+                                var EachUsersAnswerObj = require('../models/UsersAnswersModel');
+                                var eachUsersAnswerObj = new EachUsersAnswerObj();
+                                addItemsInEachUsersAnswersObj(eachUsersAnswerObj, item._id, item.kind, item.answers, questionsFromDB);
+
                                 /*к каждому ответу пользователя привязан уникальный id правильного ответа*/
                                 if (item._id === item2._id){
                                         console.log('Ответы пользователя = '+ item.answers + '\n' + 'Правильные ответы = ' + item2.correctAnswers);
-                                        console.log('------------------');
+
                                         /*сортировка массива*/
                                         function sortNumber(a, b) {
                                             return a - b;
@@ -178,12 +179,34 @@ var quizRoute = function (root) {
                                         item.answers.sort(sortNumber);
                                         item2.correctAnswers.sort(sortNumber);
                                         /*END сортировки массива*/
-                                        if (arraysEqual(item.answers, item2.correctAnswers) === false) {
-                                            amountOfIncorrectAnswers++;
-                                        }
+
+                                    if (arraysEqual(item.answers, item2.correctAnswers) === true) {
+                                        eachUsersAnswerObj.checkedAnswers = item.answers;
+                                    } else {
+                                        eachUsersAnswerObj.checkedAnswers = 'неправильный_ответ'
+                                    }
+                                    checkedUserAnswersArr.push(eachUsersAnswerObj);
+
+                                    /*---------------------------------------------------------*/
+                                    /*saving in DB */
+                                    console.log('i = ' + i);
+                                    console.log(arr.length-1)
+                                    if (i === arr.length-1){
+                                        var checkedUserAnswersObj1 = new checkedUserAnswersObj({
+                                            checkedAnswersArr: checkedUserAnswersArr,
+                                            name: req.body.name
+                                        });
+                                        console.log('я сохраняюсь в бд несколько раз');
+                                        checkedUserAnswersObj1.save(function (err, checkedUserAnswersObj1){
+                                            if (err) throw err;
+                                        });
+                                        checkedUserAnswersArr = [];
+                                    }
+                                    console.log('------------------');
                                 }
-                                console.log('Количество неправильных ответов в checkbox и в radio ворпосах ' + amountOfIncorrectAnswers);
                                 /* END проверка ответов для RADIO & CHECKBOX*/
+                                /*--------------------------------------------------------------------*/
+
 
                             break;
                             /*------------------------------------------
@@ -198,8 +221,11 @@ var quizRoute = function (root) {
                                     item.answers.forEach(function (item3, i3, arr3){
                                         item2.correctAnswers.forEach( function (item4, i4, arr4){
                                             /*key название объединения в массиве прав ответов*/
+
                                             for (var key in item4 ){
+
                                                 if (key === item3.nameOfUnion_js) {
+
                                                     item4[key].forEach (function (item5, i5, arr5) { //каждый из объектов, где есть правильные значения: leftPart, rightPart, innerPart
                                                         var counter = 0;
                                                         for (var keyPart in item5){
@@ -228,13 +254,34 @@ var quizRoute = function (root) {
                                 console.log(unique(arrCorrectUserAnswers));
                                 console.log('Правильно пользователь отметил диаграмм Венна: ' + unique(arrCorrectUserAnswers).length);
 
+
+                                var EachUsersAnswerObj = require('../models/UsersAnswersModel');
+                                var eachUsersAnswerObj = new EachUsersAnswerObj();
+                                addItemsInEachUsersAnswersObj(eachUsersAnswerObj, item._id, item.kind, item.answers, questionsFromDB);
+                                eachUsersAnswerObj.checkedAnswers = unique(arrCorrectUserAnswers);
+
+                                checkedUserAnswersArr.push(eachUsersAnswerObj);
+                                /*---------------------------------------------------------*/
+                                /*saving in DB */
+                                if (i === arr.length-1){
+                                    var checkedUserAnswersObj1 = new checkedUserAnswersObj({
+                                        checkedAnswersArr: checkedUserAnswersArr,
+                                        name: req.body.name
+                                    });
+                                    checkedUserAnswersObj1.save(function (err, checkedUserAnswersObj1){
+                                        if (err) throw err;
+                                    });
+                                    checkedUserAnswersArr = [];
+                                }
+
                                 /*END проверка ответов для ДИАГРАММ ВЕННА*/
                                 break;
                             /*------------------------------------------
                              * ------------------------------------------*/
                             /*проверка ответов для таблиц*/
+                            /*если в массиве проверенных ответов есть NaN, то это значит, что пользователь просто не стал отвечать в данных select`ах*/
                             case 'tables':
-                                var arrUserCorrectAnswers = {};
+                                var correctAnswersInTablesObj = {};
                                 if (item._id === item2._id){
                                     /*каждый объект с ответами и названием таблицы*/
                                     item.answers.forEach( function (item3, i3, arr3){
@@ -244,10 +291,10 @@ var quizRoute = function (root) {
                                             console.log('item4 = '+ item4);
                                             /*совпадение названий кажджой таблицы */
                                             if (item4.name === item3.name) {
-                                                arrUserCorrectAnswers[item4.name] = [];
+                                                correctAnswersInTablesObj[item4.name] = [];
                                                 item3.arrUserAnswers.forEach(function (item5, i5, arr5){
                                                     item4.arrUserAnswers.forEach( function (item6, i6, arr6){
-                                                        /*значения из в массиве ответов пользователя являются строкой,
+                                                        /*значения в массиве ответов пользователя являются строкой ,
                                                          поэтому преобразовываем в числа*/
                                                         if (i5 === i6){
                                                             item5.forEach(function (item7, i7, arr7) {
@@ -259,11 +306,9 @@ var quizRoute = function (root) {
                                                             //console.log('item6 =' +item6);
                                                             if (arraysEqual(item5, item6) === true) {
                                                                 //console.log('Name = ' + item3.name);
-                                                                arrUserCorrectAnswers[item4.name].push(i5);
-                                                                //console.log(arrUserCorrectAnswers);
+                                                                correctAnswersInTablesObj[item4.name].push(i5);
+                                                                //console.log(correctAnswersInTablesObj);
                                                             }
-                                                            /*Довести до ума упаковку правильных ответов*/
-                                                            //console.log('--------------');
                                                         }
                                                     })
                                                 })
@@ -271,16 +316,36 @@ var quizRoute = function (root) {
                                         });
                                     })
                                 }
+                                /*--------------------------------------------------------------------*/
+                                var EachUsersAnswerObj = require('../models/UsersAnswersModel');
+                                var eachUsersAnswerObj = new EachUsersAnswerObj();
+                                addItemsInEachUsersAnswersObj(eachUsersAnswerObj, item._id, item.kind, item.answers, questionsFromDB);
+                                eachUsersAnswerObj.checkedAnswers = correctAnswersInTablesObj;
+
+                                checkedUserAnswersArr.push(eachUsersAnswerObj);
+                                /*---------------------------------------------------------*/
+                                /*saving in DB */
+                                if (i === arr.length-1){
+                                    var checkedUserAnswersObj1 = new checkedUserAnswersObj({
+                                        checkedAnswersArr: checkedUserAnswersArr,
+                                        name: req.body.name
+                                    });
+                                    checkedUserAnswersObj1.save(function (err, checkedUserAnswersObj1){
+                                        if (err) throw err;
+                                    });
+                                    checkedUserAnswersArr = [];
+                                }
 
                                 console.log('Значения строк в таблицах, которые правильно сделал пользователь: ');
-                                console.log(arrUserCorrectAnswers);
-                                console.log('tables');
+                                console.log(correctAnswersInTablesObj);
                                 break;
 
                             /*------------------------------------------
                              * ------------------------------------------*/
                             /*проверка ответов со скриптами*/
                             case 'textareaPHP':
+                            case 'textareaJS':
+                            case 'textareaHTML':
 
                                 /*в объекте сохранеятся инфа о конкретном ответе пользователя*/
                                 var EachUsersAnswerObj = require('../models/UsersAnswersModel');
@@ -293,7 +358,11 @@ var quizRoute = function (root) {
                                     textareaPHP: [
                                         regExpFunc( /(public\s+)?function\s+(transformToCircle)\s*\(\s*\)\s*\{[\s]?(.*\s)*(return \$this;)\s*\}/gm ),
                                         regExpFunc( /(public\s+)?function\s+(show)\s*\(\s*\)\s*\{(.*\s*)*\}/gm )
-                                    ]
+                                    ],
+                                    textareaJS: [
+                                        regExpFunc(/document\.getElementById\(["']my["']\)\.innerHTML\s*\=\s*(["']\s*Hello\s*world\s*["'])(\;)?/gm)
+                                    ],
+                                    textareaHTML: []
                                 };
                                 var checkedAswersArr = [];
                                 regExpsPatternsObj[item.kind].forEach (function (item10, i10, arr10 ) {
@@ -337,8 +406,59 @@ var quizRoute = function (root) {
                                     checkedUserAnswersObj1.save(function (err, checkedUserAnswersObj1){
                                         if (err) throw err;
                                     });
+                                    /*обнуляем массив с ответами пользователя IMPORTANT*/
+                                    checkedUserAnswersArr = [];
                                 }
                                 break;
+                            /*------------------------------------------
+                             * ------------------------------------------*/
+                            /*Тесты Network*/
+                            case 'network':
+                                var arrCorrectUserAnswers = [];
+                                if (item._id === item2._id){
+
+                                    item.answers.forEach(function(item3, i3, arr3){
+                                        var counter = 0;
+                                        item2.correctAnswers.forEach ( function (item4, i4, arr4) {
+
+                                            if( i3 ===  i4){
+                                                /**/
+                                                for(var key4 in item4){
+                                                    if ( item3[key4] === JSON.stringify(item4[key4]) ){
+                                                        console.log(key4);
+                                                        console.log('--------');
+                                                        ++counter;
+                                                        /*add correct answers in array*/
+                                                        if(counter === 3){
+                                                            arrCorrectUserAnswers.push(item3);
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                                var EachUsersAnswerObj = require('../models/UsersAnswersModel');
+                                var eachUsersAnswerObj = new EachUsersAnswerObj();
+                                addItemsInEachUsersAnswersObj(eachUsersAnswerObj, item._id, item.kind, item.answers, questionsFromDB);
+                                eachUsersAnswerObj.checkedAnswers = arrCorrectUserAnswers;
+
+                                checkedUserAnswersArr.push(eachUsersAnswerObj);
+                                /*---------------------------------------------------------*/
+                                /*saving in DB */
+                                if (i === arr.length-1){
+                                    var checkedUserAnswersObj1 = new checkedUserAnswersObj({
+                                        checkedAnswersArr: checkedUserAnswersArr,
+                                        name: req.body.name
+                                    });
+                                    checkedUserAnswersObj1.save(function (err, checkedUserAnswersObj1){
+                                        if (err) throw err;
+                                    });
+                                    checkedUserAnswersArr = [];
+                                }
+                                break;
+
 
                             default:
                                 console.log( 'Я таких видов тестов не знаю...(' );

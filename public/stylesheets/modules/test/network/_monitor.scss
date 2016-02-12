@@ -1,0 +1,12 @@
+.monitor{
+  display: inline-block;
+  //height: 210px;
+  //width: 210px;
+  &__img{
+    height: 150px;
+    width: 150px;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+  }
+}
