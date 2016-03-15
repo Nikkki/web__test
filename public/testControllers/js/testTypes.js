@@ -78,6 +78,19 @@ var testTypes = {
         var code = $('.CodeMirror-line').text();
         answers.push(code);
 
+        return answers;
+    }()),
+    textareaJS: (function () {
+        var answers = [];
+        var code = $('.CodeMirror-line').text();
+        answers.push(code);
+
+        return answers;
+    }()),
+     textareaHTML: (function () {
+        var answers = [];
+        var code = $('.CodeMirror-line').text();
+        answers.push(code);
 
         return answers;
     }()),
