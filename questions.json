@@ -1,0 +1,168 @@
+{
+  "TestPHP":
+    [
+      {
+        "callback": ["/js/testControllers.js"],
+        "text":"А Вы занимаетесь самообразованием? Что Вы выучили (узнали нового, какие прочитали книги) за последние 12 месяцев?",
+        "kind": "textarea",
+        "question_number":1
+      },
+      {
+        "text": "Мы с Вами будем разрабатывать Web-сервис или сайт, и поэтому очень важно понимание работы сети Интернет. Сейчас Ваша задача объяснить, что происходит после того, как пользователь ввел www.example.com в браузере и нажал Enter. Для этого дорисуйте схему (поставьте стрелочки, а также  пронумеруйте последовательность запросов от 1 до 6) и кратко опишите, что происходит ниже. ",
+        "callback": ["/js/testControllers.js", "/js/networkTest.js"],
+        "answers": ["?", "1", "2", "3", "4", "5", "6"],
+        "kind": "network",
+        "question_number":2
+      },
+      {
+        "callback": ["/js/testControllers.js", "/js/diagramVenn.js"],
+        "text": "Работая с данными мы стараемся их нормализировать, но такое представление не всегда подходит и пользователь ожидает информацию в объединенном виде. Какие типы объединений вы знаете? Напишите название объединений и изобразите его на диаграмме Венна. ",
+        "kind": "diagramVenn",
+        "amountOfDiagrams": 4,
+        "answers": ["inner_join","left_outer_join","right_outer_join","full_outer_join"],
+        "question_number":3
+      },
+      {
+        "callback": ["/js/testControllers.js"],
+        "text": "Сейчас Вам нужно заполнить страницу истинности. Для того, чтобы упростить понимание задания и расслабиться, представьте, что Вы сейчас будете писать if-условия:)",
+        "kind": "tables",
+        "question_number":4
+      },
+      {
+        "callback": ["/js/testControllers.js"],
+        "text": "Какая из перечисленных переменных не относиться к выгрузке файлов?",
+        "kind": "radio",
+        "answers": ["max_file_size","max_execution_time", "post_max_size", "max_input_time"],
+        "question_number": 5
+      },
+      {
+        "callback": ["/js/testControllers.js"],
+        "text": "Что из ниже перечисленного является предопределенной константой?",
+        "kind": "radio",
+        "answers": ["TRUE", "NULL", "__FILE__", "CONSTANT"],
+        "question_number": 6
+      },
+      {
+        "callback": ["/js/testControllers.js"],
+        "text": "Если параметр expire в функции setcookie() не указан тогда:",
+        "kind": "radio",
+        "answers": ["Срок действия Cookie никогда не истечет",
+          "Срок действия Cookie истечет в момент закрытия браузера",
+          "Срок действия Cookie истечет в пределах 30 минут",
+          "Срок действия Cookie истечет в течении 24 часов"],
+        "question_number": 7
+      },
+      {
+        "callback": ["/js/testControllers.js"],
+        "text": "Что из нижеперечисленного позволяет передавать значение переменной между различными страницами?",
+        "kind": "radio",
+        "answers": ["static", "global", "session_register()", "Ничего из вышеперечисленного"],
+        "question_number": 8
+      },
+      {
+        "callback": ["/js/testControllers.js"],
+        "text": "Существует ли поддержка ключевого слова goto в последней версии PHP",
+        "kind": "radio",
+        "answers": ["Да", "Нет"],
+        "question_number": 9
+      }
+    ],
+  "correctAnswers":
+    [
+      {
+        "kind":"textarea",
+        "question_number":1
+      },
+      {
+        "kind": "network",
+        "question_number": 2,
+        "correctAnswers":  [
+          {
+            "number": 4,
+            "arrowRight": true,
+            "arrowLeft": null
+          },
+          {
+            "number": 3,
+            "arrowLeft": true,
+            "arrowRight": null
+          },
+          {
+            "number": 5,
+            "arrowRight": true,
+            "arrowLeft": null
+          },
+          {
+            "number": 2,
+            "arrowLeft": true,
+            "arrowRight": null
+          }, {
+            "number": 0,
+            "arrowRight": true,
+            "arrowLeft": null
+          },
+          {
+            "number": 1,
+            "arrowLeft": true,
+            "arrowRight": null
+          }
+        ]
+      },
+      {
+        "correctAnswers":  [{
+          "inner_join": [{"leftPart": false, "innerPart": true, "rightPart": false}],
+          "left_outer_join": [{"leftPart": true, "innerPart": false, "rightPart": false},
+            {"leftPart": true, "innerPart": true, "rightPart": false}],
+          "right_outer_join": [{"leftPart": false, "innerPart": false, "rightPart": true},
+            {"leftPart": false, "innerPart": true, "rightPart": true}],
+          "full_outer_join": [{"leftPart": true, "innerPart": true, "rightPart": true},
+            {"leftPart": true, "innerPart": false, "rightPart": true}]
+        }],
+        "kind": "diagramVenn",
+        "question_number": 3
+      },
+      {
+        "correctAnswers":  [
+        {
+          "name": "table-huge",
+          "arrUserAnswers": [[1,0,1,1,1],[1,1,0,0,1], [0,1,0,1,1], [0,1,0,1,1]]
+        },
+        {
+          "name": "table-small-and",
+          "arrUserAnswers": [[1,0],[0,0]]
+        },
+        {
+          "name": "table-small-or",
+          "arrUserAnswers": [[1,1],[1,0]]
+        }
+      ],
+        "kind": "tables",
+        "question_number": 4
+      },
+      {
+        "correctAnswers":  [1],
+        "kind": "radio",
+        "question_number": 5
+      },
+      {
+        "correctAnswers":  [2],
+        "kind": "radio",
+        "question_number": 6
+      },
+      {
+        "correctAnswers":  [1],
+        "kind": "radio",
+        "question_number": 7
+      },
+      {
+        "correctAnswers":  [2],
+        "kind": "radio",
+        "question_number": 8
+      },
+      {
+        "correctAnswers":  [0],
+        "kind": "radio",
+        "question_number": 9
+      }
+    ]
+}

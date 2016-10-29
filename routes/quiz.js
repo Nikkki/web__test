@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
+var is_json = require('is-json');
 var mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/COURSES/testPHP');
 var TestPHP = require('../models/testPHP').testPHP;
@@ -16,38 +17,48 @@ var checkedUserAnswersArr = [];
  что кнопка "Далее" в каждом новом тесте
  прогружается позже после загрузки скриптов и
  она не будет ловиться jquery и нельзя обрабатывать события */
-//var testPHP1 = new TestPHP({
-//    callback: ['/js/testControllers.js','/js/codemirror/codemirror.js',
-//    '/js/codemirror/css.js','/js/codemirror/htmlmixed.js','/js/codemirror/javascript.js','/js/codemirror/xml.js',
-//    '/js/codemirror/textareaHTML.js'],
-//    text: 'Реализуйте цепочку вызовов на PHP для класса Shape:',
-//    kind: 'textareaHTML'
-//    //answers: ['Да', 'Нет']
-//});
-//
-//testPHP1.save(function (err, testPHP1 ) {
-//    if(err) throw err;
-//    console.log(testPHP1);
-//});
-//
-//var correctAnswers1 = new correctAnswers({
-//    //correctAnswers:  [0],
-//    kind: 'textareaHTML',
-//    _id: testPHP1._id
-//});
-//
-////
-//correctAnswers1.save(function (err, correctAnswers1 ) {
-//    if(err) throw err;
-//    console.log(correctAnswers1);
-//});
 
-//
-//
-//
-//TestPHP.find({},function(err, docs) {
-//   return docs;
-//});
+
+
+
+fs.readFile('questions.json', 'utf-8', function( err, data )  {
+    if (err) throw new Error('I didn\'t find the file with questions');
+    if (is_json(data) === false) throw new Error('The file with questions doesn\'t in JSON format');
+
+    //remove all docs from collection with questions & answers
+    TestPHP.remove({}, function(error)  {
+        if (error) throw new Error();
+
+        correctAnswers.remove({}, function(error) {
+            if (error) throw new Error();
+            // ----ended removing
+
+            //далее мы парсим вопросы и ответы и начинаем сохранять их в бд
+            var questions = JSON.parse(data);
+            questions.TestPHP.forEach(function(question, i, questions_arr){
+                var testPHP1 = new TestPHP(question);
+                testPHP1.save(function (err, testPHP1 ) {
+                    if(err) throw err;
+                });
+                //у каждого вопроса и ответа есть в файле questions.json поле с названием question_number,
+                //то есть 1-му объекту с вопросом соответствует 1 объект с ответами и это значит, что question_number
+                // у них одинаковые.
+                questions.correctAnswers.forEach((correctAns, j, correctAns_arr) => {
+                    // Мы находим соответствие вопрос-ответ по question_number
+                    if(question.question_number === correctAns.question_number){
+                        // и делаем связку вопрос-ответ по _id и далее сохраняем в бд
+                        correctAns._id = testPHP1._id;
+                        var correctAnswers1 = new correctAnswers(correctAns);
+                        correctAnswers1.save((err2, correctAnswers1) => {
+                           if(err2) throw err2;
+                        });
+                    }
+                });
+            });
+        });
+    });
+});
+
 
 
 
