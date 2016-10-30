@@ -1,7 +1,7 @@
 body{
-  background:url(../img/bgi.jpg) no-repeat center center fixed #EB8E1C;
+  background: #fbfbfb;
   background-size:cover;
-  color: #fff !important;
+  color: #222222 !important;
   -webkit-background-size:cover;
   -moz-background-size:cover;
   -o-background-size:cover;
@@ -9,3 +9,8 @@ body{
   width:100%;
   height:100%;
 }
+
+.btn:focus{
+  outline: none !important;
+}
+

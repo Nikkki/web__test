@@ -10,6 +10,12 @@
     <link href="/styles/main.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles/codemirror.css">
 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
     <!-- HTML5 Shim and Respond._diagramVenn.scss IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond._diagramVenn.scss doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -19,7 +25,6 @@
 </head>
 <body>
 <section class="container-fluid ">
-    <div class="row block-logo"><img src="/img/logo2.png" alt="Logo" class=" logo img-responsive center-block"></div>
     <div class="clearfix"></div>
     <div id="test" class="container"></div>
     <div id="render-test-btn"></div>
@@ -44,51 +49,54 @@
                 <!--<input type="radio" name="test" class="form-control input-text" id="testJS" data-prop="имя">-->
                 <!--</div>-->
             </div>
-            <button type="button" id="startTest-js" class=" btn btn-default center-block btn-register" >Начать тест</button>
+            <button type="button" id="startTest-js" class=" btn btn-success center-block btn-register" >Начать тест
+            <span class="glyphicon glyphicon-pencil"></span>
+            </button>
         </form>
     </script>
 <!--END home page-->
 
 <!-- for question with  CHECKBOXes-->
     <script type="text/html" id='testQuestion-checkbox-js'>
-
-        <p class="quiz-question__question"> <%= question.text %> </p>
-        <ul class="quiz-question__options">
-            <% question.answers.forEach(function(item,key,list){ %>
-            <li class="quiz-question__option">
-                <label>
-                    <input class="quiz-question__input" type="checkbox" value="<%= key %>" name=" checkbox <%= key %> ">
-                    <span class="quiz-question__title"><%= item %></span>
-                </label>
-            </li>
-            <% }); %>
-        </ul>
-
+        <section class="quiz-question row">
+            <p class="quiz-question__question"> <%= question.text %> </p>
+            <ul class="quiz-question__options">
+                <% question.answers.forEach(function(item,key,list){ %>
+                <li class="quiz-question__option">
+                    <label>
+                        <input class="quiz-question__input" type="checkbox" value="<%= key %>" name=" checkbox <%= key %> ">
+                        <span class="quiz-question__title"><%= item %></span>
+                    </label>
+                </li>
+                <% }); %>
+            </ul>
+        </section>
     </script>
 <!--END for question with  CHECKBOXes-->
 <!--------------------------------------------------------------------->
 <!-- for question with  Radio-->
 <script type="text/html" id='testQuestion-radio-js'>
-    <section class="quiz-question"></section>
-    <p class="quiz-question__question"> <%= question.text %> </p>
-    <ul class="quiz-question__options">
-        <% question.answers.forEach(function(item,key,list){ %>
-        <li class="quiz-question__option">
-            <label>
-                <input class="quiz-question__input" type="radio" value="<%= key %>" name="<%= question.kind  %> ">
-                <span class="quiz-question__title"><%= item %></span>
-            </label>
-        </li>
-        <% }); %>
-    </ul>
+    <section class="quiz-question row">
+        <h4 class="quiz-question__question"> <%= question.text %> </h4>
+        <ul class="quiz-question__options list-unstyled">
+            <% question.answers.forEach(function(item,key,list){ %>
+            <li class="quiz-question__option radio">
+                <label>
+                    <input class="quiz-question__input" type="radio" value="<%= key %>" name="<%= question.kind  %> ">
+                    <span class="quiz-question__title"><%= item %></span>
+                </label>
+            </li>
+            <% }); %>
+        </ul>
+    </section>
 </script>
 <!--END for question with  Radio-->
 <!--------------------------------------------------------------------->
 <!--QUESTION with textarea-->
 <script type="text/html" id="testQuestions-textarea-js">
-    <section class="quiz-question">
-        <p class="quiz-question__question"> <%= question.text %> </p>
-            <textarea class="quiz-question__textarea textarea-js" name="textarea" ></textarea>
+    <section class="quiz-question row">
+        <h4 class="quiz-question__question "> <%= question.text %> </h4>
+            <textarea class="quiz-question__textarea form-control textarea-js " rows="3" name="textarea" ></textarea>
     </section>
 </script>
 <!--END--QUESTION with textarea-->
@@ -111,15 +119,18 @@
 <!-- END NETWORK -->
 <!--TABLES-->
 <script type="text/html" id="testQuestions-tables-js">
-    <p class="quiz-question__question"> <%= question.text %> </p>
     <section class="quiz-question row center-block" >
-        <table class="table-huge table-huge-js" name="table-huge">
+        <h4 class="quiz-question__question"> <%= question.text %> </h4>
+        <table class="table-huge table-huge-js table table-bordered" name="table-huge">
+            <thead>
+                <tr>
+                    <th colspan="2">Переменные</th>
+                    <th colspan="4">Промежуточные функции</th>
+                    <th>Ответ</th>
+                </tr>
+            </thead>
+
             <tbody>
-            <tr>
-                <td colspan="2">Переменные</td>
-                <td colspan="4">Промежуточные функции</td>
-                <td>Ответ</td>
-            </tr>
             <tr>
                 <td>x</td>
                 <td>y</td>
@@ -133,22 +144,14 @@
                 <td>0</td>
                 <td>0</td>
                 <td>
-                    <select name="table_select00" >
+                    <select name="table_select00" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
                 </td>
                 <td>
-                    <select name="table_select01" >
-                        <option value="null">?</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
-                </td>
-                <td>
-
-                    <select name="table_select02" >
+                    <select name="table_select01" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -156,7 +159,7 @@
                 </td>
                 <td>
 
-                    <select name="table_select03" >
+                    <select name="table_select02" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -164,7 +167,15 @@
                 </td>
                 <td>
 
-                    <select name="table_select04" >
+                    <select name="table_select03" class="quiz-select">
+                        <option value="null">?</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+                <td>
+
+                    <select name="table_select04" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -175,34 +186,34 @@
                 <td>0</td>
                 <td>1</td>
                 <td>
-                    <select name="table_select10" >
+                    <select name="table_select10" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
                 </td>
                 <td>
-                    <select name="table_select11" >
+                    <select name="table_select11" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
                 </td>
                 <td>
-                    <select name="table_select12" >
+                    <select name="table_select12" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select></td>
                 <td>
-                    <select name="table_select13" >
+                    <select name="table_select13" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
                 </td>
                 <td>
-                    <select name="table_select14" >
+                    <select name="table_select14" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -213,32 +224,32 @@
                 <td>1</td>
                 <td>0</td>
                 <td>
-                    <select name="table_select20" >
+                    <select name="table_select20" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
                 </td>
                 <td>
-                    <select name="table_select21" >
+                    <select name="table_select21" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select></td>
                 <td>
-                    <select name="table_select22" >
+                    <select name="table_select22" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select></td>
                 <td>
-                    <select name="table_select23" >
+                    <select name="table_select23" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select></td>
                 <td>
-                    <select name="table_select24" >
+                    <select name="table_select24" class="quiz-select">
                         <option value="null">?</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -258,9 +269,9 @@
         </table>
         <!-- END HUGE table-->
         <!-- small _tables.scss-->
-        <section class="quiz-question row center-block" >
+        <section class="center-block row" >
 
-            <table class='table-small table-small-or-js' name="table-small-or">
+            <table class='table table-bordered col-sm-6 table-small table-small-or-js' name="table-small-or">
                 <tr>
                     <td>OR</td>
                     <td>1</td>
@@ -269,14 +280,14 @@
                 <tr>
                     <td>1</td>
                     <td>
-                        <select name="table-small1_select00" >
+                        <select name="table-small1_select00" class="quiz-select">
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
                         </select>
                     </td>
                     <td>
-                        <select name="table-small1_select01" >
+                        <select name="table-small1_select01" class="quiz-select">
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -286,14 +297,14 @@
                 <tr>
                     <td>0</td>
                     <td>
-                        <select name="table-small1_select10" >
+                        <select name="table-small1_select10" class="quiz-select">
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
                         </select>
                     </td>
                     <td>
-                        <select name="table-small1_select11" >
+                        <select name="table-small1_select11" class="quiz-select">
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -303,7 +314,7 @@
             </table>
 
 
-            <table class='table-small table-small-and-js' name="table-small-and">
+            <table class='table table-bordered col-sm-6 table-small table-small-and-js' name="table-small-and">
                 <tr>
                     <td>AND</td>
                     <td>1</td>
@@ -312,14 +323,14 @@
                 <tr>
                     <td>1</td>
                     <td>
-                        <select name="table-small2_select00" >
+                        <select name="table-small2_select00" class="quiz-select">
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
                         </select>
                     </td>
                     <td>
-                        <select name="table-small2_select01" >
+                        <select name="table-small2_select01" class="quiz-select">
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -329,14 +340,14 @@
                 <tr>
                     <td>0</td>
                     <td>
-                        <select name="table-small2_select10" >
+                        <select name="table-small2_select10" class="quiz-select">
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
                         </select>
                     </td>
                     <td>
-                        <select name="table-small2_select11" >
+                        <select name="table-small2_select11" class="quiz-select">
                             <option value="null">?</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -403,8 +414,10 @@
 
 
 <!-- For buttons-->
-<script type="text/tamplete" id="btn-test-js">
-    <button type="submit" id="btn-continue" class="btn-continue-js btn btn-default center-block btn-register" >Далее</button>
+<script type="text/html" id="btn-test-js">
+    <button type="submit" id="btn-continue" class="btn-continue-js btn btn-lg btn-warning center-block" >Далее
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </button>
 </script>
     <!--END for buttons-->
 <!--------------------------------------------------------------------->
@@ -413,6 +426,19 @@
     <section class="test-progress">
         <span>Вопрос <%= numQuestion %> из <%= amountOfQuestions %> </span>
     </section>
+    <div class="row">
+        <div class="quiz-timeline ">
+
+            <% for(var i = 0; i < amountOfQuestions; i++){ %>
+            <% if (numQuestion === i+1) {%>
+                <span class="quiz-timeline__number quiz-timeline__number_current"><%= i+1 %></span>
+            <% } else { %>
+            <span class="quiz-timeline__number"><%= i+1 %></span>
+
+            <% }} %>
+
+    </div>
+        </div>
 </script>
 <!--END--OF-PROGRESS-->
 <!--------------------------------------------------------------------->

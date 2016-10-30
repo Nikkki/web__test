@@ -89,7 +89,10 @@ var Router = Backbone.Router.extend({
                         document.body.appendChild(script);
                     });
                 }
-                /*when server sends 'false' - it means, that questions ends*/
+
+
+
+                /*when server sends 'false' - it means that questions ends*/
                 if (response === false){
                     var name = JSON.parse(sessionStorage.getItem('name'));
                     var answers = JSON.parse(sessionStorage.getItem('answers'));
@@ -115,8 +118,6 @@ var Router = Backbone.Router.extend({
                         result.render();
                         sessionStorage.removeItem('amountOfQuestions');
                         sessionStorage.removeItem('numTestPage');
-                        //sessionStorage.removeItem('name');
-                        //sessionStorage.removeItem('answers');
                     }
                 }
             },

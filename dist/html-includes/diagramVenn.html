@@ -1,7 +1,7 @@
 <section class="quiz-question row">
-    <p class="quiz-question__question"> <%= question.text %> </p>
+    <h4 class="quiz-question__question"> <%= question.text %> </h4>
     <% for(var i = 0; i < question.amountOfDiagrams; i++){ %>
-    <div class="diagramTest__i col-md-3" data-name-diagramvenn="diagramTest__i<%= i %>-js">
+    <div class="diagramTest__i col-lg-3 col-md-3 col-sm-6 col-xs-12 center-block text-center" data-name-diagramvenn="diagramTest__i<%= i %>-js">
         <svg width="210px" height="210px" id="diagramSvg" class="diagramSvg diagramSvg<%= i %>-js" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 119.4 79.4" style="enable-background:new 0 0 119.4 79.4;" xml:space="preserve">
                     <g id="diagramSvg__left" class="diagramSvg__left" >
@@ -20,7 +20,7 @@
                 </svg>
 
         <!-- _diagramVenn.scss использует value для проверки на правльность отвеченного теста-->
-        <select name="nameOfUnion_js" id="nameOfUnion" class="center-block">
+        <select name="nameOfUnion_js" id="nameOfUnion" class="quiz-select">
             <option value="inner_join">Inner Join</option>
             <option value="left_outer_join">Left outer join</option>
             <option value="right_outer_join">Right outer join</option>

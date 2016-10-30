@@ -1,7 +1,7 @@
-<section class="quiz-question row center-block network" >
+<section class="quiz-question center-block network" >
     <!-- ------------>
-    <p class="quiz-question__question"> <%= question.text %> </p>
-    <div class="system-unit">
+    <h4 class="quiz-question__question"> <%= question.text %> </h4>
+    <div class="system-unit  text-center">
         <img src="/img/server.png " alt="DB server" class="img-responsive system-unit__img">
         <p>DB server</p>
     </div>
@@ -9,7 +9,7 @@
     <div class="b-select-with-arrows">
         <div class="select-with-arrows" data-number-of-select="0">
             <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
-            <select name="select1" class="select-js">
+            <select name="select1" class="select-js quiz-select">
                 <% question.answers.forEach(function(item,key,list){ %>
                 <option value="<%= item %>"><%= item %></option>
                 <% }); %>
@@ -19,7 +19,7 @@
 
         <div class="select-with-arrows" data-number-of-select="1">
             <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
-            <select name="select2" class="select-js">
+            <select name="select2" class="select-js quiz-select">
                 <% question.answers.forEach(function(item,key,list){ %>
                 <option value="<%= item %>"><%= item %></option>
                 <% }); %>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <!-- ------------>
-    <div class="system-unit">
+    <div class="system-unit text-center">
         <img src="/img/server.png" alt="WEb server" class=" img-responsive system-unit__img">
         <p>Web server</p>
     </div>
@@ -36,7 +36,7 @@
     <div class="b-select-with-arrows">
         <div class="select-with-arrows" data-number-of-select="2">
             <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
-            <select name="select3" class="select-js">
+            <select name="select3" class="select-js quiz-select">
                 <% question.answers.forEach(function(item,key,list){ %>
                 <option value="<%= item %>"><%= item %></option>
                 <% }); %>
@@ -46,7 +46,7 @@
 
         <div class="select-with-arrows" data-number-of-select="3">
             <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
-            <select name="select4" class="select-js">
+            <select name="select4" class="select-js quiz-select">
                 <% question.answers.forEach(function(item,key,list){ %>
                 <option value="<%= item %>"><%= item %></option>
                 <% }); %>
@@ -56,15 +56,15 @@
         </div>
     </div>
     <!-- ---------- -->
-    <div class="monitor">
+    <div class="monitor  text-center">
         <img src="/img/comp.png" alt="WEb server" class="img-responsive monitor__img">
         <p>Web browser</p>
     </div>
     <!-- ---------->
-    <div class="b-select-with-arrows">
+    <div class="b-select-with-arrows ">
         <div class="select-with-arrows" data-number-of-select="4">
             <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
-            <select name="select5" class="select-js">
+            <select name="select5" class="select-js quiz-select">
                 <% question.answers.forEach(function(item,key,list){ %>
                 <option value="<%= item %>"><%= item %></option>
                 <% }); %>
@@ -73,7 +73,7 @@
         </div>
         <div class="select-with-arrows" data-number-of-select="5">
             <img src="/img/arrow_left.png" alt="arrow_left" class="select-with-arrows__arrow arrow-js" data-direction-js="arrowLeft">
-            <select name="select6" class="select-js">
+            <select name="select6" class="select-js quiz-select">
                 <% question.answers.forEach(function(item,key,list){ %>
                 <option value="<%= item %>"><%= item %></option>
                 <% }); %>
@@ -82,16 +82,18 @@
         </div>
     </div>
     <!-- ---------- -->
-    <div class="system-unit">
+    <div class="system-unit text-center">
         <img src="/img/server.png" alt="DNS server" class="img-responsive system-unit__img">
         <p>DNS server</p>
     </div>
     <!--TExtareas-->
     <div class="b-textarea">
         <%  for(var i = 0; i < 6; i++){ %>
-        <div class="b-textarea__i">
-            <p class="b-textarea__text"> <%= i+1 %> </p>
-            <input type="text" class="b-textarea__textarea textarea-js" name="textarea<%=i%>" data-textarea-js="<%=i%>">
+        <div class="b-textarea__i row">
+            <p class="b-textarea__text col-md-1 col-lg-1"> <%= i+1 %> </p>
+            <div class="col-md-11 col-lg-11">
+                <input type="text" class="b-textarea__textarea textarea-js form-control " name="textarea<%=i%>" data-textarea-js="<%=i%>">
+            </div>
         </div>
         <%};%>
     </div>

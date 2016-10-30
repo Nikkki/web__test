@@ -10,7 +10,6 @@ module.exports = function(router) {
         },
 
         moveToNextTest: function () {
-            console.log('click');
             var numTestPage = JSON.parse(sessionStorage.getItem('numTestPage'));
 
             numTestPage++;

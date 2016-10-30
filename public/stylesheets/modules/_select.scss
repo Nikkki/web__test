@@ -1,0 +1,33 @@
+.quiz-select{
+  background: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .2s;
+  color: #333333;
+  display: block;
+  margin: 0 auto;
+
+
+  & option{
+    background: #fff6a8;
+    box-shadow: none;
+
+    &:hover{
+      cursor: pointer;
+      background: #ffda14;
+    }
+
+    &:checked{
+      background: #ffda14;
+    }
+  }
+
+  &:active{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  &:focus{
+    outline: none;
+  }
+}

@@ -74,22 +74,22 @@ Validator.prototype.validate = function (data, callback) {
 
 /*EXAMPLE*/
 
-var data = {
-    username: '',
-    email: '',
-    phoneNum: '+380500000248'
-};
+//var data = {
+//    username: '',
+//    email: '',
+//    phoneNum: '+380500000248'
+//};
 
 /*1.название свойства должно совпадать с name в form*/
 /*2.вывод ошибок на экран будет последователен,
     как вписать название ошибок в массив значений свойств*/
-var validator = new Validator({
-    username: ['isNonEmpty', 'isAlpha'],
-    email: ['isNonEmpty', 'isEmail'],
-    phoneNum: ['isNonEmpty','isPhoneUA']
-});
-
-validator.validate(data);
+//var validator = new Validator({
+//    username: ['isNonEmpty', 'isAlpha'],
+//    email: ['isNonEmpty', 'isEmail'],
+//    phoneNum: ['isNonEmpty','isPhoneUA']
+//});
+//
+//validator.validate(data);
 //console.log(validator.errors);
 
 module.exports = Validator;

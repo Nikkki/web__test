@@ -10,13 +10,6 @@ var gulp = require('gulp'),
     fileinclude = require('gulp-file-include');
 
 // html includes
-//gulp.task('gulp_file_include', function(){
-//    gulp.src('public/dist/**/*.html').
-//        pipe(gulp-file-include({
-//
-//        }))
-//        .pipe(gulp.dest('./'))
-//});
 gulp.task('gulp_file_include', function () {
   gulp.src('public/**/*.html')
       .pipe(fileinclude({
@@ -52,7 +45,7 @@ gulp.task('connect', function() {
 
 /*html*/
 gulp.task('html', function () {
-  gulp.src('public/quiz.html')
+  gulp.src('public/dist.html')
     .pipe(connect.reload());
 });
 
@@ -95,7 +88,7 @@ gulp.task('networkTest', function () {
 });
 
 gulp.task('watch', function (){
-	gulp.watch(['./dist/quiz.html'], ['html']);
+	gulp.watch(['./public/quiz.html'], ['html']);
 	gulp.watch(['./public/quiz.html'], ['gulp_file_include']);
   	gulp.watch('./public/javascripts/**/*.js', ['browserify']);
 	gulp.watch('./public/testControllers/js/*.js', ['testControllers']);
@@ -103,6 +96,5 @@ gulp.task('watch', function (){
 	gulp.watch('./public/testControllers/network/js/*.js', ['networkTest']);
 	gulp.watch(['./public/stylesheets/**/*.scss'], ['css', 'sass']);
 });
-gulp.task('diagramVenn', ['watch', 'diagramVennBrowserify']);
-gulp.task('diagramVenn', ['watch', 'testControllers']);
+gulp.task('diagramVenn', ['watch', 'diagramVennBrowserify', 'testControllers']);
 gulp.task('build', ['connect', 'html', 'sass', 'css', 'browserify', 'watch', 'gulp_file_include']);

@@ -1,14 +1,8 @@
-
-
 .quiz-question .table-huge{
-  width: 350px;
-  border: 1px solid #000;
   border-collapse: collapse;
 }
 
-.quiz-question .table-huge tr td{
-  height: 30px;
-  border: 1px solid #000;
+.quiz-question .table-huge tr td, .quiz-question .table-huge tr th{
   text-align: center;
 }
 
@@ -19,23 +13,12 @@
   margin-right: 4px;
 }
 .logic-sign{
-  color: #c3ff28;
+  color: #000000;
 }
 
-.quiz-question .table-huge tr td:last-child{
-  width: 200px;
-}
 
 //small tables
 
-.quiz-question .table-small{
-  border: 1px solid #000;
-  border-collapse: collapse;
-}
-
 .quiz-question .table-small tr td{
-  height: 30px;
-  width: 35px;
-  border: 1px solid #000;
   text-align: center;
 }
