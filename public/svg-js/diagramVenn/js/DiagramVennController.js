@@ -64,7 +64,6 @@ var DiagramVennController = function (model) {
     $('#btn-continue').on('click', function (event) {
         var answersArr = JSON.parse(sessionStorage.getItem('answers'));
         var arrLength = answersArr.length;
-        conso
         console.log(modelsArr[0].nameOfUnion_js);
         console.log(answersArr);
         console.log(answersArr[arrLength - 1] );

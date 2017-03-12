@@ -23,7 +23,7 @@ module.exports = function (router) {
                 //kind теста должен совпадать с название template[тип]
                 this.$el.html(this.template[kind]({question: this.model.toJSON()}));
             } else {
-                router.navigate("quiz/questions/result", {trigger: true})
+                router.navigate("quiz/questions/result", {trigger: true, replace: true})
             }
             return this.el;
         }

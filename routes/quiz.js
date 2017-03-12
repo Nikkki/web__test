@@ -141,6 +141,7 @@ var quizRoute = function (root) {
                 var usersAnswers = req.body.answers;
                 var correctAnswers = docs;
                 var questionsFromDB = docs2;
+                console.log(usersAnswers);
                 /*на сервер приходят значения ответов с типом string,  поэтому и надо перевести их в number*/
                 usersAnswers.forEach(function (item, i, arr) {
 
@@ -218,6 +219,7 @@ var quizRoute = function (root) {
 
                                     /*должны совпадать id правильного ответа и конкретный вопрос*/
                                     if (item._id === item2._id) {
+
                                         item.answers.forEach(function (item3, i3, arr3) {
                                             item2.correctAnswers.forEach(function (item4, i4, arr4) {
                                                 /*key название объединения в массиве прав ответов*/
