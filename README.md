@@ -11,8 +11,14 @@ password: nik
 
 ### Start the server:
 ```
+npm install
 npm start
 ```
+
+### Test\`s URL
+
+*http://localhost:3000/quiz*
+
 ### DB
 Questions in test saves in db in *COURSES/testphps*
 <br/>
