@@ -9,9 +9,13 @@ username: nik
 password: nik 
 <br/>
 
-### Start the server:
+### Install npm packages:
 ```
 npm install
+```
+
+### Start the server:
+```
 npm start
 ```
 
