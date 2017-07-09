@@ -1,14 +1,6 @@
 This is a test. You can add different types of test like checkbox, radio and other. 
 <br />
 
-### MONGODB
-mongoose.connect('mongodb://localhost:27017/COURSES');
-<br/>
-username: nik 
-<br/>
-password: nik 
-<br/>
-
 ### Install npm packages:
 ```
 npm install
@@ -23,7 +15,16 @@ npm start
 
 *http://localhost:3000/quiz*
 
-### DB
+
+### MONGODB
+mongoose.connect('mongodb://localhost:27017/COURSES');
+<br/>
+username: nik 
+<br/>
+password: nik 
+<br/>
+
+### If you wanna see info in DB
 Questions in test saves in db in *COURSES/testphps*
 <br/>
 Correct answers saves in db in *COURSES/correctanswers*
@@ -31,5 +32,5 @@ Correct answers saves in db in *COURSES/correctanswers*
 Results of the test saves in MongoDB in *COURSES/checkeduseranswers*
 <br/>
 
-#### How can you add new test describes in file questions_for_php_test(doc).docx
+### How can you add new test describes in file questions_for_php_test(doc).docx
  
